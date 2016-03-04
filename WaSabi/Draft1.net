@@ -1,0 +1,20 @@
+* C:\Users\enric\workspace\Progetto linguaggi e compilatori\Draft1.asc
+R1 VDD N004 20k
+R2 N004 0 20k
+RC VDD N001 10k
+RE N005 0 1k
+Q1 N001 N004 N005 0 NPN
+V1 VDD 0 15
+C1 N004 N003 10m
+C3 VDD 0 0.1µ
+C4 VDD 0 0.01µ
+C2 VDD 0 1µ
+V2 N003 0 AC 1mV 0
+C5 N002 N001 100µ
+R3 N002 0 10k
+.model NPN NPN
+.model PNP PNP
+.lib C:\PROGRA~2\LTC\LTSPIC~1\lib\cmp\standard.bjt
+.ac dec 1000 10 1000
+.backanno
+.end

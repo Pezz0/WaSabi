@@ -1,0 +1,9 @@
+Circuit gnof
+  Lib:
+    C:\a s d_\orcocan_\ .lib
+  components
+   	R 100 at [Gnd,n1]
+   	R 200 at [Gnd,n1]
+Simulate:
+		.op
+		
