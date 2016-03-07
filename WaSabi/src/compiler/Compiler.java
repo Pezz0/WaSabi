@@ -28,21 +28,45 @@ import constants.ModelType;
 import constants.Value;
 import constants.Waveform;
 
+
+/**
+ *Parses a WaSabi file.
+ */
 public class Compiler extends GrammarBaseListener {
 
+	/**
+	 * Tokens detected in the parsed file.
+	 */
 	private CommonTokenStream tokens;
+	
+	/**
+	 * Syntax tree of the parsed file.
+	 */
 	private ParserRuleContext syntaxTree;
 
+	/**
+	 * Prints a list of all the tokens in the console.
+	 */
 	public void stampTokens() {
 		List<Token> ts = tokens.getTokens();
 		for (int i = 0; i < ts.size(); ++i)
 			System.out.println(ts.get(i).getText() + "\t[" + ts.get(i).getType() + "]");
 	}
 
+	
+	/**
+	 * Prints the syntax tree in the console.
+	 */
 	public void stampSintaxTree() {
 		StampTree.stampTree(syntaxTree);
 	}
 
+	/**
+	 * Initializes a new compiler instance.
+	 * @param path <String> The path of the file that will be parsed
+	 * @throws IOException Throws an {@link IOException} if error are encountered opening/reading the file.
+	 * @throws SemanticException Throws a {@link SemanticException} if semantic errors are found in the file.
+	 */
 	public Compiler(String path) throws IOException, SemanticException {
 		// Lexer
 		ANTLRFileStream input = new ANTLRFileStream(path);
@@ -94,9 +118,19 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Error handling
+	/**
+	 * List of exception raised during the parsing.
+	 */
 	private Vector<SemanticException> exceptions;
+	/**
+	 * Internal variable; true if the circuit has at least a component.
+	 */
 	boolean comp;
 
+	/**
+	 * Throws all the exceptions raised during the parsing process
+	 * @throws SemanticException This method can throw a SemanticException if semantic errors are found in the file
+	 */
 	public void throwException() throws SemanticException {
 		for (SemanticException se : exceptions)
 			throw se;
@@ -114,16 +148,30 @@ public class Compiler extends GrammarBaseListener {
 				throw new FloatingNodeException(nodes.get(i));
 	}
 
+	
 	// Title
+	/**
+	 * Internal variable; true if the circuit has a title.
+	 */
 	private boolean isTit;
+	/**
+	 * Stores the circuit's title.
+	 */
 	private String title;
 
+	/**
+	 * Executes at the end of a Title context; extracts the title from the context. 
+	 * @param ctx Context of a title (a sub syntax tree with title as root).
+	 */
 	@Override
 	public void exitTitle(grammar.GrammarParser.TitleContext ctx) {
 		isTit = true;
 		title = ctx.ID().getText();
 	}
 
+	/**
+	 * Prints the title in the console.
+	 */
 	public void stampTitle() {
 		if (isTit)
 			System.out.println(title);
@@ -131,6 +179,11 @@ public class Compiler extends GrammarBaseListener {
 			System.out.println("Unnamed circuit");
 	}
 
+	/**
+	 * Prints the title to file. Used to generate the SPICE .cir file.
+	 * @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampTitle(FileWriter writer) throws IOException {
 		if (isTit)
 			if (title.length() < 80)
@@ -143,8 +196,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Library
+	/**
+	 * Stores the circuit's libraries.
+	 */
 	private Vector<String> librarys;
 
+	/**
+	 * Executes at the start of a libraries context; extracts the libraries paths from the context.
+	 * @param ctx Context of a libraries (a sub syntax tree with libraries as root).
+	 */
 	@Override
 	public void enterNewlib(grammar.GrammarParser.NewlibContext ctx) {
 		String ns = ctx.PATH().getText();
@@ -160,11 +220,19 @@ public class Compiler extends GrammarBaseListener {
 
 	}
 
+	/**
+	 * Prints the libraries in the console.
+	 */
 	public void stampLib() {
 		for (String s : librarys)
 			System.out.println("\t" + s);
 	}
 
+	/**
+	 * Prints the libraries to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampLib(FileWriter writer) throws IOException {
 		for (String s : librarys) {
 			writer.write(".lib " + s);
@@ -174,17 +242,32 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Model type
+	/**
+	 * Internal variable; stores the last declared model.
+	 */
 	private ModelType lastModelType;
 
+	/**
+	 * Resets the last declared model.
+	 * @see lastModelType
+	 */
 	private void resetLastModelType() {
 		lastModelType = null;
 	}
 
+	/**
+	 * Executes at the end of a model declaration context; extracts the model type from the context.
+	 * @param ctx Context of a model declaration (a sub syntax tree with model declaration as root).
+	 */
 	@Override
 	public void exitNewmod(grammar.GrammarParser.NewmodContext ctx) {
 		lastModelType = new ModelType(ctx.MODTYPE().getText());
 	}
 
+	/**
+	 * Executes at the end of a model usage context; extracts the name and model type from the context.
+	 * @param ctx Context of a model usage (a sub syntax tree with model usage as root).
+	 */
 	@Override
 	public void exitModtypeID(grammar.GrammarParser.ModtypeIDContext ctx) {
 		if (ctx.ID() != null) {
@@ -211,10 +294,27 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Value
+	/**
+	 * Internal variable; stores the last declared value.
+	 */
 	private Value lastValue;
+	/**
+	 * Internal variable; stores the last used value.
+	 */
 	private String lastValueID1;
+	/**
+	 * Internal variable; stores the last used value.
+	 * There are cases where 2 values are used at the same time; this variable is used in those cases.
+	 * @see lastValueID1
+	 */
 	private String lastValueID2;
 
+	/**
+	 * Resets the last declared/used value.
+	 * @see lastValue
+	 * @see lastValueID1
+	 * @see lastValueID2
+	 */
 	private void resetLastValue() {
 		lastValue = null;
 		lastValueID1 = null;
@@ -222,6 +322,10 @@ public class Compiler extends GrammarBaseListener {
 
 	}
 
+	/**
+	 * Executes at the end of a value declaration context; extracts the numeric value from the context.
+	 * @param ctx Context of a value declaration (a sub syntax tree with value declaration as root).
+	 */
 	@Override
 	public void exitNewvalue(grammar.GrammarParser.NewvalueContext ctx) {
 		if (ctx.PI() != null) {
@@ -240,6 +344,10 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Executes at the end of a value usage context; extracts the name and value from the context.
+	 * @param ctx Context of a value usage (a sub syntax tree with value usage as root).
+	 */
 	@Override
 	public void exitValueID(grammar.GrammarParser.ValueIDContext ctx) {
 		lastValueID2 = lastValueID1;
@@ -269,18 +377,33 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Waveform
+	/**
+	 * Internal variable; stores the last declared waveform.
+	 */
 	private Waveform lastWaveform;
 
+	/**
+	 * Resets the last declared waveform.
+	 * @see lastWaveform
+	 */
 	private void resetLastWaveform() {
 		lastWaveform = null;
 	}
 
+	/**
+	 * Executes at the end of a DC waveform declaration context; extracts the magnitude from the context.
+	 * @param ctx Context of the waveform declaration (a sub syntax tree with waveform declaration as root).
+	 */
 	@Override
 	public void exitNewwaveDC(grammar.GrammarParser.NewwaveDCContext ctx) {
 		lastWaveform = new Waveform(lastValueID1);
 		resetLastValue();
 	}
 
+	/**
+	 * Executes at the end of an AC waveform declaration context; extracts the magnitude and phase from the context.
+	 * @param ctx Context of the waveform declaration (a sub syntax tree with waveform declaration as root).
+	 */
 	@Override
 	public void exitNewwaveAC(grammar.GrammarParser.NewwaveACContext ctx) {
 
@@ -288,6 +411,10 @@ public class Compiler extends GrammarBaseListener {
 		resetLastValue();
 	}
 
+	/**
+	 * Executes at the end of a waveform usage context; extracts the name and magnitude (and phase, if present) from the context.
+	 * @param ctx Context of the waveform usage (a sub syntax tree with waveform usage as root).
+	 */
 	@Override
 	public void exitWaveID(grammar.GrammarParser.WaveIDContext ctx) {
 		if (ctx.ID() != null) {
@@ -315,8 +442,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Constants
+	/**
+	 * Internal variable; stores the list of constants.
+	 */
 	private Vector<Constant> constants = new Vector<Constant>();
 
+	/**
+	 * Executes at the end of a constant declaration context; extracts the name and the value (or model, or Waveform) from the context.
+	 * @param ctx Context of the constant declaration (a sub syntax tree with constant declaration as root).
+	 */
 	@Override
 	public void exitNewconst(grammar.GrammarParser.NewconstContext ctx) {
 		String name = ctx.ID().getText();
@@ -347,6 +481,9 @@ public class Compiler extends GrammarBaseListener {
 
 	}
 
+	/**
+	 * Prints the constants in the console.
+	 */
 	public void stampConst() {
 		for (Constant c : constants) {
 			String s = "\t" + c.getName() + "\t\t= ";
@@ -362,10 +499,27 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// nodes
+	/**
+	 * Internal variable; stores the list of the nodes names.
+	 */
 	private Vector<String> nodes;
+	/**
+	 * Internal variable; stores the count of the times each node has been used.
+	 * nodeCount[i] contains how many times the node in nodes[i] has been used.
+	 * This variable is used in the {@link FloatingNodeException} exception.
+	 */
 	private Vector<Integer> nodeCount;
+	/**
+	 * Internal variable; stores the list of the last encountered nodes.
+	 */
 	private Vector<Integer> newNodes;
+	/**
+	 * Internal variable; is true if a ground node is present.
+	 */
 	boolean gnd;
+	/**
+	 * Internal variable; used to check if two ground nodes are declared.
+	 */
 	boolean gnd2;
 
 	private void resetNewNodes() {
