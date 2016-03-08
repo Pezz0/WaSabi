@@ -522,10 +522,18 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	boolean gnd2;
 
+	/**
+	 * Resets the list of the encountered nodes.
+	 * @see newNodes
+	 */
 	private void resetNewNodes() {
 		newNodes.clear();
 	}
 
+	/**
+	 * Executes at the end of a node context; extracts the number of the node (and eventually if the node is GND) from the context.
+	 * @param ctx Context of the node (a sub syntax tree with node as root).
+	 */
 	@Override
 	public void exitNode(grammar.GrammarParser.NodeContext ctx) {
 		int n;
@@ -549,8 +557,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// resistances
+	/**
+	 * Stores the list of resistances.
+	 */
 	private Vector<PassiveBipole> resistances;
 
+	/**
+	 * Executes at the end of a resistance context; extracts the value and connected nodes from the context.
+	 * @param ctx Context of the resistance (a sub syntax tree with resistance as root).
+	 */
 	@Override
 	public void exitResistance(grammar.GrammarParser.ResistanceContext ctx) {
 		if (newNodes.get(0) == newNodes.get(1))
@@ -567,6 +582,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of resistances in the console.
+	 */
 	public void stampRes() {
 		int i = 1;
 		for (PassiveBipole b : resistances) {
@@ -575,6 +593,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of resistances to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampRes(FileWriter writer) throws IOException {
 		int i = 1;
 		for (PassiveBipole b : resistances) {
@@ -585,8 +608,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Capacitor
+	/**
+	 * Stores the list of capacitors.
+	 */
 	private Vector<PassiveBipole> capacitors;
 
+	/**
+	 * Executes at the end of a capacitor context; extracts the value and connected nodes from the context.
+	 * @param ctx Context of the capacitor (a sub syntax tree with capacitor as root).
+	 */
 	@Override
 	public void exitCapaticance(grammar.GrammarParser.CapaticanceContext ctx) {
 		if (newNodes.get(0) == newNodes.get(1))
@@ -603,6 +633,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of capacitors in the console.
+	 */
 	public void stampCap() {
 		int i = 1;
 		for (PassiveBipole b : capacitors) {
@@ -611,6 +644,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of capacitors to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampCap(FileWriter writer) throws IOException {
 		int i = 1;
 		for (PassiveBipole b : capacitors) {
@@ -621,8 +659,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Inductances
+	/**
+	 * Stores the list of inductances.
+	 */
 	private Vector<PassiveBipole> inductances;
 
+	/**
+	 * Executes at the end of a inductance context; extracts the value and connected nodes from the context.
+	 * @param ctx Context of the inductance (a sub syntax tree with inductance as root).
+	 */
 	@Override
 	public void exitInductance(grammar.GrammarParser.InductanceContext ctx) {
 		if (newNodes.get(0) == newNodes.get(1))
@@ -639,6 +684,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of inductances in the console.
+	 */
 	public void stampInd() {
 		int i = 1;
 		for (PassiveBipole b : inductances) {
@@ -647,6 +695,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of inductances to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampInd(FileWriter writer) throws IOException {
 		int i = 1;
 		for (PassiveBipole b : inductances) {
@@ -657,8 +710,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// Voltage source
+	/**
+	 * Stores the list of voltage sources.
+	 */
 	private Vector<ActiveBipole> voltages;
 
+	/**
+	 * Executes at the end of a voltage source context; extracts the waveform and connected nodes from the context.
+	 * @param ctx Context of the voltage source (a sub syntax tree with voltage source as root).
+	 */
 	@Override
 	public void exitVoltage(grammar.GrammarParser.VoltageContext ctx) {
 
@@ -680,6 +740,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of voltage sources to the console.
+	 */
 	public void stampVol() {
 		int i = 1;
 		for (ActiveBipole b : voltages) {
@@ -688,6 +751,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of voltage sources to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampVol(FileWriter writer) throws IOException {
 		int i = 1;
 		for (ActiveBipole b : voltages) {
@@ -698,8 +766,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// current source
+	/**
+	 * Stores the list of current sources.
+	 */
 	private Vector<ActiveBipole> currents;
 
+	/**
+	 * Executes at the end of a current source context; extracts the waveform and connected nodes from the context.
+	 * @param ctx Context of the current source (a sub syntax tree with current source as root).
+	 */
 	@Override
 	public void exitCurrent(grammar.GrammarParser.CurrentContext ctx) {
 		if (newNodes.get(0) == newNodes.get(1))
@@ -713,6 +788,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of current sources in the console.
+	 */
 	public void stampCur() {
 		int i = 1;
 		for (ActiveBipole b : currents) {
@@ -721,6 +799,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of current sources to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampCur(FileWriter writer) throws IOException {
 		int i = 1;
 		for (ActiveBipole b : currents) {
@@ -731,8 +814,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// diode
+	/**
+	 * Stores the list of diodes.
+	 */
 	private Vector<Diode> diodes;
 
+	/**
+	 * Executes at the end of a diode context; extracts model and connected nodes from the context.
+	 * @param ctx Context of the diode (a sub syntax tree with diode as root).
+	 */
 	@Override
 	public void exitDiode(grammar.GrammarParser.DiodeContext ctx) {
 		if (newNodes.get(0) == newNodes.get(1))
@@ -746,6 +836,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of diodes in the console.
+	 */
 	public void stampDio() {
 		int i = 1;
 		for (Diode d : diodes) {
@@ -754,6 +847,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of diodes to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampDio(FileWriter writer) throws IOException {
 		int i = 1;
 		for (Diode d : diodes) {
@@ -764,8 +862,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// bjt
+	/**
+	 * Stores the list of BJTs.
+	 */
 	private Vector<Transistor> bjts;
 
+	/**
+	 * Executes at the end of a BJT context; extracts model and connected nodes from the context.
+	 * @param ctx Context of the BJT (a sub syntax tree with BJT as root).
+	 */
 	@Override
 	public void exitBjt(grammar.GrammarParser.BjtContext ctx) {
 		bjts.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
@@ -776,6 +881,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of BJTs in the console.
+	 */
 	public void stampBjt() {
 		int i = 1;
 		for (Transistor b : bjts) {
@@ -784,6 +892,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of BJTs to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampBjt(FileWriter writer) throws IOException {
 		int i = 1;
 		for (Transistor b : bjts) {
@@ -794,8 +907,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// mosfets
+	/**
+	 * Stores the list of MOSFETs.
+	 */
 	private Vector<Transistor> mosfets;
 
+	/**
+	 * Executes at the end of a MOSFET context; extracts model and connected nodes from the context.
+	 * @param ctx Context of the MOSFET (a sub syntax tree with MOSFET as root).
+	 */
 	@Override
 	public void exitMosfet(grammar.GrammarParser.MosfetContext ctx) {
 		mosfets.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
@@ -806,6 +926,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of MOSFETs in the console.
+	 */
 	public void stampMos() {
 		int i = 1;
 		for (Transistor b : mosfets) {
@@ -814,6 +937,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of MOSFETs to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampMos(FileWriter writer) throws IOException {
 		int i = 1;
 		for (Transistor b : mosfets) {
@@ -824,8 +952,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// jfests
+	/**
+	 * Stores the list of JFETs.
+	 */
 	private Vector<Transistor> jfets;
 
+	/**
+	 * Executes at the end of a JFET context; extracts model and connected nodes from the context.
+	 * @param ctx Context of the JFET (a sub syntax tree with JFET as root).
+	 */
 	@Override
 	public void exitJfet(grammar.GrammarParser.JfetContext ctx) {
 		jfets.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
@@ -836,6 +971,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of JFETs in the console.
+	 */
 	public void stampJfet() {
 		int i = 1;
 		for (Transistor b : jfets) {
@@ -844,6 +982,11 @@ public class Compiler extends GrammarBaseListener {
 		}
 	}
 
+	/**
+	 * Prints the list of JFETs to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampJfet(FileWriter writer) throws IOException {
 		int i = 1;
 		for (Transistor b : jfets) {
@@ -854,8 +997,15 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// generic model
+	/**
+	 * Stores the list of generic models.
+	 */
 	private Vector<GenericModel> models;
 
+	/**
+	 * Executes at the end of a generic model context; extracts model and connected nodes from the context.
+	 * @param ctx Context of the generic model (a sub syntax tree with generic model as root).
+	 */
 	@Override
 	public void exitModel(grammar.GrammarParser.ModelContext ctx) {
 		GenericModel m = new GenericModel(lastModelType);
@@ -870,6 +1020,9 @@ public class Compiler extends GrammarBaseListener {
 		resetNewNodes();
 	}
 
+	/**
+	 * Prints the list of generic models in the console.
+	 */
 	public void stampMod() {
 		int i = 1;
 		for (GenericModel b : models) {
@@ -879,6 +1032,11 @@ public class Compiler extends GrammarBaseListener {
 
 	}
 
+	/**
+	 * Prints the list of generic models to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampMod(FileWriter writer) throws IOException {
 		int i = 1;
 		for (GenericModel b : models) {
@@ -889,18 +1047,33 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	// directives
+	/**
+	 * Stores the list of SPICE analysis directives.
+	 */
 	private Vector<String> directives;
 
+	/**
+	 * Executes at the end of a directive context; extracts the directive from the context.
+	 * @param ctx Context of the directive (a sub syntax tree with directive as root).
+	 */
 	@Override
 	public void enterNewdir(grammar.GrammarParser.NewdirContext ctx) {
 		directives.addElement(ctx.DIRECTIVE().getText());
 	}
 
+	/**
+	 * Prints the list of directives in the console.
+	 */
 	public void stampDir() {
 		for (String s : directives)
 			System.out.println("\t" + s);
 	}
 
+	/**
+	 * Prints the list of directives to file. Used to generate the SPICE .cir file.
+	 *  @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	private void stampDir(FileWriter writer) throws IOException {
 		for (String s : directives) {
 			writer.write(s);
@@ -910,6 +1083,9 @@ public class Compiler extends GrammarBaseListener {
 
 	// Stamp all
 
+	/**
+	 * Prints all the components in the console.
+	 */
 	public void stampComp() {
 		stampRes();
 		stampCap();
@@ -923,6 +1099,9 @@ public class Compiler extends GrammarBaseListener {
 		stampMod();
 	}
 
+	/**
+	 * Prints all the circuit information in the console.
+	 */
 	public void stampAll() {
 		System.out.print("Title: ");
 		stampTitle();
@@ -940,6 +1119,11 @@ public class Compiler extends GrammarBaseListener {
 		stampDir();
 	}
 
+	/**
+	 * Prints all the circuit information to file. Used to generate the SPICE .cir file.
+	 * @param writer A {@link FileWriter} instance used to write on file.
+	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 */
 	public void writeOnFile(File path) throws IOException {
 		FileWriter writer = new FileWriter(path);
 		
