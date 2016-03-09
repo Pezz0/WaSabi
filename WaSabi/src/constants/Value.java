@@ -120,7 +120,7 @@ public class Value {
 
 	/**
 	 * Checks if the value of the constant is the same as the value of the one provided as argument.
-	 * @param f Value to check for equality.
+	 * @param v Value to check for equality.
 	 * @return True if the value of this instance is equals to the value of the one provided as argument.
 	 */
 	public boolean equals(Value v) {

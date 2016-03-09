@@ -145,7 +145,7 @@ public class Constant {
 
 	/**
 	 * Checks if the name of the constant is the same as the one provided as argument.
-	 * @param c Name to check for equality.
+	 * @param name Name to check for equality.
 	 * @return True if the name of this instance is equals to the name provided as argument.
 	 */
 	public boolean equals(String name)

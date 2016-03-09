@@ -9,7 +9,7 @@ public class FloatingNodeException extends SemanticException {
 
 	/**
 	 * Constructor for a FloatingNodeException class.
-	 * @param token The token containing all the info about the error (such as the line).
+	 * @param node The name of the floating node.
 	 */
 	public FloatingNodeException(String node) {
 		super(null, "The node '" + node + "' is used only one time, it should be used at least two times.");

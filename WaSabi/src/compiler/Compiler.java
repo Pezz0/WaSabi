@@ -1121,7 +1121,7 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints all the circuit information to file. Used to generate the SPICE .cir file.
-	 * @param writer A {@link FileWriter} instance used to write on file.
+	 * @param path The path of the file in which to write.
 	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
 	 */
 	public void writeOnFile(File path) throws IOException {
