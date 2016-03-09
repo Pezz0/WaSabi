@@ -9,6 +9,7 @@ import exceptions.SemanticException;
 
 public class Main {
 
+	
 	private static Compiler compiler;
 
 	public static void main(String[] args) throws IOException, SemanticException {
@@ -110,6 +111,11 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Compiles a WaSabi file to the specified path.
+	 * @param path The path in which the SPICE file will be saved.
+	 * @return Returns 10 if the build is successful, 20 otherwise.
+	 */
 	private static int compile(String path) {
 
 		System.out.println("---------------------");
