@@ -20,8 +20,21 @@ public class Main {
 
 		String input;
 		Scanner scanIn = new Scanner(System.in);
+		
+		System.out.println(" ___       __   ________  ________  ________  ________  ___     ");
+		System.out.println("|\\  \\     |\\  \\|\\   __  \\|\\   ____\\|\\   __  \\|\\   __  \\|\\  \\    ");
+		System.out.println("\\ \\  \\    \\ \\  \\ \\  \\|\\  \\ \\  \\___|\\ \\  \\|\\  \\ \\  \\|\\ /\\ \\  \\   ");
+		System.out.println(" \\ \\  \\  __\\ \\  \\ \\   __  \\ \\_____  \\ \\   __  \\ \\   __  \\ \\  \\  ");
+		System.out.println("  \\ \\  \\|\\__\\_\\  \\ \\  \\ \\  \\|____|\\  \\ \\  \\ \\  \\ \\  \\|\\  \\ \\  \\ ");
+		System.out.println("   \\ \\____________\\ \\__\\ \\__\\____\\_\\  \\ \\__\\ \\__\\ \\_______\\ \\__\\");
+		System.out.println("    \\|____________|\\|__|\\|__|\\_________\\|__|\\|__|\\|_______|\\|__|");
+		System.out.println("                            \\|_________|                        ");
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
 		while (true) {
+			
 			System.out.println("Possible command: ");
 
 			System.out.println(" - compile 'path' \t to compile a new wasabi source file");
@@ -142,4 +155,6 @@ public class Main {
 		}
 
 	}
+	
+	
 }
