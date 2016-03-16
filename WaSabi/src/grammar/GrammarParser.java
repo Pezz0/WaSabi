@@ -31,20 +31,20 @@ public class GrammarParser extends Parser {
 	public static final int
 		RULE_axiom = 0, RULE_pr = 1, RULE_title = 2, RULE_library = 3, RULE_listlib = 4, 
 		RULE_newlib = 5, RULE_constants = 6, RULE_listconst = 7, RULE_newconst = 8, 
-		RULE_newconst2 = 9, RULE_newvalue = 10, RULE_newwave = 11, RULE_newwaveDC = 12, 
-		RULE_newwaveAC = 13, RULE_newmod = 14, RULE_components = 15, RULE_listcomp = 16, 
-		RULE_newcomp = 17, RULE_resistance = 18, RULE_capaticance = 19, RULE_inductance = 20, 
-		RULE_voltage = 21, RULE_current = 22, RULE_diode = 23, RULE_bjt = 24, 
-		RULE_mosfet = 25, RULE_jfet = 26, RULE_model = 27, RULE_node = 28, RULE_valueID = 29, 
-		RULE_waveID = 30, RULE_modtypeID = 31, RULE_listnodes = 32, RULE_listnodes2 = 33, 
-		RULE_sim = 34, RULE_dirsim = 35, RULE_newdir = 36;
+		RULE_newconst2 = 9, RULE_newvalue = 10, RULE_units = 11, RULE_newwave = 12, 
+		RULE_newwaveDC = 13, RULE_newwaveAC = 14, RULE_newmod = 15, RULE_components = 16, 
+		RULE_listcomp = 17, RULE_newcomp = 18, RULE_resistance = 19, RULE_capacitance = 20, 
+		RULE_inductance = 21, RULE_voltage = 22, RULE_current = 23, RULE_diode = 24, 
+		RULE_bjt = 25, RULE_mosfet = 26, RULE_jfet = 27, RULE_model = 28, RULE_node = 29, 
+		RULE_valueID = 30, RULE_waveID = 31, RULE_modtypeID = 32, RULE_listnodes = 33, 
+		RULE_listnodes2 = 34, RULE_sim = 35, RULE_dirsim = 36, RULE_newdir = 37;
 	public static final String[] ruleNames = {
 		"axiom", "pr", "title", "library", "listlib", "newlib", "constants", "listconst", 
-		"newconst", "newconst2", "newvalue", "newwave", "newwaveDC", "newwaveAC", 
-		"newmod", "components", "listcomp", "newcomp", "resistance", "capaticance", 
-		"inductance", "voltage", "current", "diode", "bjt", "mosfet", "jfet", 
-		"model", "node", "valueID", "waveID", "modtypeID", "listnodes", "listnodes2", 
-		"sim", "dirsim", "newdir"
+		"newconst", "newconst2", "newvalue", "units", "newwave", "newwaveDC", 
+		"newwaveAC", "newmod", "components", "listcomp", "newcomp", "resistance", 
+		"capacitance", "inductance", "voltage", "current", "diode", "bjt", "mosfet", 
+		"jfet", "model", "node", "valueID", "waveID", "modtypeID", "listnodes", 
+		"listnodes2", "sim", "dirsim", "newdir"
 	};
 
 	@Override
@@ -94,15 +94,15 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(75);
+			setState(77);
 			_la = _input.LA(1);
 			if (_la==CIRCUIT) {
 				{
-				setState(74); title();
+				setState(76); title();
 				}
 			}
 
-			setState(77); pr();
+			setState(79); pr();
 			}
 		}
 		catch (RecognitionException re) {
@@ -153,36 +153,36 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(87);
+			setState(89);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LIBRARY) | (1L << CONST) | (1L << COMPONENT) | (1L << SIMULATE))) != 0)) {
 				{
-				setState(83);
+				setState(85);
 				switch (_input.LA(1)) {
 				case LIBRARY:
 					{
-					setState(79); library();
+					setState(81); library();
 					}
 					break;
 				case CONST:
 					{
-					setState(80); constants();
+					setState(82); constants();
 					}
 					break;
 				case COMPONENT:
 					{
-					setState(81); components();
+					setState(83); components();
 					}
 					break;
 				case SIMULATE:
 					{
-					setState(82); sim();
+					setState(84); sim();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(85); pr();
+				setState(87); pr();
 				}
 			}
 
@@ -222,8 +222,8 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(89); match(CIRCUIT);
-			setState(90); match(ID);
+			setState(91); match(CIRCUIT);
+			setState(92); match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -262,8 +262,8 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92); match(LIBRARY);
-			setState(93); listlib();
+			setState(94); match(LIBRARY);
+			setState(95); listlib();
 			}
 		}
 		catch (RecognitionException re) {
@@ -305,12 +305,12 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(100);
 			_la = _input.LA(1);
 			if (_la==PATH) {
 				{
-				setState(95); newlib();
-				setState(96); listlib();
+				setState(97); newlib();
+				setState(98); listlib();
 				}
 			}
 
@@ -349,7 +349,7 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(100); match(PATH);
+			setState(102); match(PATH);
 			}
 		}
 		catch (RecognitionException re) {
@@ -388,8 +388,8 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(102); match(CONST);
-			setState(103); listconst();
+			setState(104); match(CONST);
+			setState(105); listconst();
 			}
 		}
 		catch (RecognitionException re) {
@@ -431,12 +431,12 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(108);
+			setState(110);
 			_la = _input.LA(1);
 			if (_la==ID) {
 				{
-				setState(105); newconst();
-				setState(106); listconst();
+				setState(107); newconst();
+				setState(108); listconst();
 				}
 			}
 
@@ -479,9 +479,9 @@ public class GrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110); match(ID);
-			setState(111); match(EQUAL);
-			setState(112); newconst2();
+			setState(112); match(ID);
+			setState(113); match(EQUAL);
+			setState(114); newconst2();
 			}
 		}
 		catch (RecognitionException re) {
@@ -523,26 +523,26 @@ public class GrammarParser extends Parser {
 		Newconst2Context _localctx = new Newconst2Context(_ctx, getState());
 		enterRule(_localctx, 18, RULE_newconst2);
 		try {
-			setState(117);
+			setState(119);
 			switch (_input.LA(1)) {
 			case PI:
 			case VALUE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(114); newvalue();
+				setState(116); newvalue();
 				}
 				break;
 			case DC:
 			case AC:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(115); newwave();
+				setState(117); newwave();
 				}
 				break;
 			case MODTYPE:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(116); newmod();
+				setState(118); newmod();
 				}
 				break;
 			default:
@@ -562,8 +562,10 @@ public class GrammarParser extends Parser {
 
 	public static class NewvalueContext extends ParserRuleContext {
 		public TerminalNode PI() { return getToken(GrammarParser.PI, 0); }
+		public UnitsContext units() {
+			return getRuleContext(UnitsContext.class,0);
+		}
 		public TerminalNode VALUE() { return getToken(GrammarParser.VALUE, 0); }
-		public TerminalNode UNIT() { return getToken(GrammarParser.UNIT, 0); }
 		public NewvalueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -581,22 +583,14 @@ public class GrammarParser extends Parser {
 	public final NewvalueContext newvalue() throws RecognitionException {
 		NewvalueContext _localctx = new NewvalueContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_newvalue);
-		int _la;
 		try {
 			setState(124);
 			switch (_input.LA(1)) {
 			case VALUE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(119); match(VALUE);
-				setState(121);
-				_la = _input.LA(1);
-				if (_la==UNIT) {
-					{
-					setState(120); match(UNIT);
-					}
-				}
-
+				setState(121); match(VALUE);
+				setState(122); units();
 				}
 				break;
 			case PI:
@@ -607,6 +601,50 @@ public class GrammarParser extends Parser {
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class UnitsContext extends ParserRuleContext {
+		public TerminalNode UNIT() { return getToken(GrammarParser.UNIT, 0); }
+		public UnitsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_units; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterUnits(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitUnits(this);
+		}
+	}
+
+	public final UnitsContext units() throws RecognitionException {
+		UnitsContext _localctx = new UnitsContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_units);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(127);
+			_la = _input.LA(1);
+			if (_la==UNIT) {
+				{
+				setState(126); match(UNIT);
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -643,20 +681,20 @@ public class GrammarParser extends Parser {
 
 	public final NewwaveContext newwave() throws RecognitionException {
 		NewwaveContext _localctx = new NewwaveContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_newwave);
+		enterRule(_localctx, 24, RULE_newwave);
 		try {
-			setState(128);
+			setState(131);
 			switch (_input.LA(1)) {
 			case DC:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(126); newwaveDC();
+				setState(129); newwaveDC();
 				}
 				break;
 			case AC:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(127); newwaveAC();
+				setState(130); newwaveAC();
 				}
 				break;
 			default:
@@ -697,14 +735,14 @@ public class GrammarParser extends Parser {
 
 	public final NewwaveDCContext newwaveDC() throws RecognitionException {
 		NewwaveDCContext _localctx = new NewwaveDCContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_newwaveDC);
+		enterRule(_localctx, 26, RULE_newwaveDC);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(130); match(DC);
-			setState(131); match(OPENBRACKET);
-			setState(132); valueID();
-			setState(133); match(CLOSEBRACKET);
+			setState(133); match(DC);
+			setState(134); match(OPENBRACKET);
+			setState(135); valueID();
+			setState(136); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -745,16 +783,16 @@ public class GrammarParser extends Parser {
 
 	public final NewwaveACContext newwaveAC() throws RecognitionException {
 		NewwaveACContext _localctx = new NewwaveACContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_newwaveAC);
+		enterRule(_localctx, 28, RULE_newwaveAC);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(135); match(AC);
-			setState(136); match(OPENBRACKET);
-			setState(137); valueID();
-			setState(138); match(SEPARATOR);
-			setState(139); valueID();
-			setState(140); match(CLOSEBRACKET);
+			setState(138); match(AC);
+			setState(139); match(OPENBRACKET);
+			setState(140); valueID();
+			setState(141); match(SEPARATOR);
+			setState(142); valueID();
+			setState(143); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -786,11 +824,11 @@ public class GrammarParser extends Parser {
 
 	public final NewmodContext newmod() throws RecognitionException {
 		NewmodContext _localctx = new NewmodContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_newmod);
+		enterRule(_localctx, 30, RULE_newmod);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(142); match(MODTYPE);
+			setState(145); match(MODTYPE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -825,12 +863,12 @@ public class GrammarParser extends Parser {
 
 	public final ComponentsContext components() throws RecognitionException {
 		ComponentsContext _localctx = new ComponentsContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_components);
+		enterRule(_localctx, 32, RULE_components);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(144); match(COMPONENT);
-			setState(145); listcomp();
+			setState(147); match(COMPONENT);
+			setState(148); listcomp();
 			}
 		}
 		catch (RecognitionException re) {
@@ -867,17 +905,17 @@ public class GrammarParser extends Parser {
 
 	public final ListcompContext listcomp() throws RecognitionException {
 		ListcompContext _localctx = new ListcompContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_listcomp);
+		enterRule(_localctx, 34, RULE_listcomp);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(150);
+			setState(153);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MODEL) | (1L << RES) | (1L << CAP) | (1L << IND) | (1L << VOL) | (1L << CUR) | (1L << DIO) | (1L << BJT) | (1L << MOS) | (1L << JFET))) != 0)) {
 				{
-				setState(147); newcomp();
-				setState(148); listcomp();
+				setState(150); newcomp();
+				setState(151); listcomp();
 				}
 			}
 
@@ -904,6 +942,9 @@ public class GrammarParser extends Parser {
 		public VoltageContext voltage() {
 			return getRuleContext(VoltageContext.class,0);
 		}
+		public CapacitanceContext capacitance() {
+			return getRuleContext(CapacitanceContext.class,0);
+		}
 		public JfetContext jfet() {
 			return getRuleContext(JfetContext.class,0);
 		}
@@ -918,9 +959,6 @@ public class GrammarParser extends Parser {
 		}
 		public MosfetContext mosfet() {
 			return getRuleContext(MosfetContext.class,0);
-		}
-		public CapaticanceContext capaticance() {
-			return getRuleContext(CapaticanceContext.class,0);
 		}
 		public DiodeContext diode() {
 			return getRuleContext(DiodeContext.class,0);
@@ -941,68 +979,68 @@ public class GrammarParser extends Parser {
 
 	public final NewcompContext newcomp() throws RecognitionException {
 		NewcompContext _localctx = new NewcompContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_newcomp);
+		enterRule(_localctx, 36, RULE_newcomp);
 		try {
-			setState(162);
+			setState(165);
 			switch (_input.LA(1)) {
 			case RES:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(152); resistance();
+				setState(155); resistance();
 				}
 				break;
 			case CAP:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(153); capaticance();
+				setState(156); capacitance();
 				}
 				break;
 			case IND:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(154); inductance();
+				setState(157); inductance();
 				}
 				break;
 			case VOL:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(155); voltage();
+				setState(158); voltage();
 				}
 				break;
 			case CUR:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(156); current();
+				setState(159); current();
 				}
 				break;
 			case DIO:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(157); diode();
+				setState(160); diode();
 				}
 				break;
 			case BJT:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(158); bjt();
+				setState(161); bjt();
 				}
 				break;
 			case MOS:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(159); mosfet();
+				setState(162); mosfet();
 				}
 				break;
 			case JFET:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(160); jfet();
+				setState(163); jfet();
 				}
 				break;
 			case MODEL:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(161); model();
+				setState(164); model();
 				}
 				break;
 			default:
@@ -1051,18 +1089,18 @@ public class GrammarParser extends Parser {
 
 	public final ResistanceContext resistance() throws RecognitionException {
 		ResistanceContext _localctx = new ResistanceContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_resistance);
+		enterRule(_localctx, 38, RULE_resistance);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(164); match(RES);
-			setState(165); valueID();
-			setState(166); match(AT);
-			setState(167); match(OPENBRACKET);
-			setState(168); node();
-			setState(169); match(SEPARATOR);
-			setState(170); node();
-			setState(171); match(CLOSEBRACKET);
+			setState(167); match(RES);
+			setState(168); valueID();
+			setState(169); match(AT);
+			setState(170); match(OPENBRACKET);
+			setState(171); node();
+			setState(172); match(SEPARATOR);
+			setState(173); node();
+			setState(174); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1076,7 +1114,7 @@ public class GrammarParser extends Parser {
 		return _localctx;
 	}
 
-	public static class CapaticanceContext extends ParserRuleContext {
+	public static class CapacitanceContext extends ParserRuleContext {
 		public TerminalNode AT() { return getToken(GrammarParser.AT, 0); }
 		public ValueIDContext valueID() {
 			return getRuleContext(ValueIDContext.class,0);
@@ -1091,34 +1129,34 @@ public class GrammarParser extends Parser {
 			return getRuleContexts(NodeContext.class);
 		}
 		public TerminalNode CAP() { return getToken(GrammarParser.CAP, 0); }
-		public CapaticanceContext(ParserRuleContext parent, int invokingState) {
+		public CapacitanceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_capaticance; }
+		@Override public int getRuleIndex() { return RULE_capacitance; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterCapaticance(this);
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).enterCapacitance(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitCapaticance(this);
+			if ( listener instanceof GrammarListener ) ((GrammarListener)listener).exitCapacitance(this);
 		}
 	}
 
-	public final CapaticanceContext capaticance() throws RecognitionException {
-		CapaticanceContext _localctx = new CapaticanceContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_capaticance);
+	public final CapacitanceContext capacitance() throws RecognitionException {
+		CapacitanceContext _localctx = new CapacitanceContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_capacitance);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(173); match(CAP);
-			setState(174); valueID();
-			setState(175); match(AT);
-			setState(176); match(OPENBRACKET);
-			setState(177); node();
-			setState(178); match(SEPARATOR);
-			setState(179); node();
-			setState(180); match(CLOSEBRACKET);
+			setState(176); match(CAP);
+			setState(177); valueID();
+			setState(178); match(AT);
+			setState(179); match(OPENBRACKET);
+			setState(180); node();
+			setState(181); match(SEPARATOR);
+			setState(182); node();
+			setState(183); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1163,18 +1201,18 @@ public class GrammarParser extends Parser {
 
 	public final InductanceContext inductance() throws RecognitionException {
 		InductanceContext _localctx = new InductanceContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_inductance);
+		enterRule(_localctx, 42, RULE_inductance);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(182); match(IND);
-			setState(183); valueID();
-			setState(184); match(AT);
-			setState(185); match(OPENBRACKET);
-			setState(186); node();
-			setState(187); match(SEPARATOR);
-			setState(188); node();
-			setState(189); match(CLOSEBRACKET);
+			setState(185); match(IND);
+			setState(186); valueID();
+			setState(187); match(AT);
+			setState(188); match(OPENBRACKET);
+			setState(189); node();
+			setState(190); match(SEPARATOR);
+			setState(191); node();
+			setState(192); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1219,18 +1257,18 @@ public class GrammarParser extends Parser {
 
 	public final VoltageContext voltage() throws RecognitionException {
 		VoltageContext _localctx = new VoltageContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_voltage);
+		enterRule(_localctx, 44, RULE_voltage);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(191); match(VOL);
-			setState(192); waveID();
-			setState(193); match(AT);
-			setState(194); match(OPENBRACKET);
-			setState(195); node();
-			setState(196); match(SEPARATOR);
-			setState(197); node();
-			setState(198); match(CLOSEBRACKET);
+			setState(194); match(VOL);
+			setState(195); waveID();
+			setState(196); match(AT);
+			setState(197); match(OPENBRACKET);
+			setState(198); node();
+			setState(199); match(SEPARATOR);
+			setState(200); node();
+			setState(201); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1275,18 +1313,18 @@ public class GrammarParser extends Parser {
 
 	public final CurrentContext current() throws RecognitionException {
 		CurrentContext _localctx = new CurrentContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_current);
+		enterRule(_localctx, 46, RULE_current);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(200); match(CUR);
-			setState(201); waveID();
-			setState(202); match(AT);
-			setState(203); match(OPENBRACKET);
-			setState(204); node();
-			setState(205); match(SEPARATOR);
-			setState(206); node();
-			setState(207); match(CLOSEBRACKET);
+			setState(203); match(CUR);
+			setState(204); waveID();
+			setState(205); match(AT);
+			setState(206); match(OPENBRACKET);
+			setState(207); node();
+			setState(208); match(SEPARATOR);
+			setState(209); node();
+			setState(210); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1331,18 +1369,18 @@ public class GrammarParser extends Parser {
 
 	public final DiodeContext diode() throws RecognitionException {
 		DiodeContext _localctx = new DiodeContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_diode);
+		enterRule(_localctx, 48, RULE_diode);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(209); match(DIO);
-			setState(210); modtypeID();
-			setState(211); match(AT);
-			setState(212); match(OPENBRACKET);
-			setState(213); node();
-			setState(214); match(SEPARATOR);
-			setState(215); node();
-			setState(216); match(CLOSEBRACKET);
+			setState(212); match(DIO);
+			setState(213); modtypeID();
+			setState(214); match(AT);
+			setState(215); match(OPENBRACKET);
+			setState(216); node();
+			setState(217); match(SEPARATOR);
+			setState(218); node();
+			setState(219); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1390,20 +1428,20 @@ public class GrammarParser extends Parser {
 
 	public final BjtContext bjt() throws RecognitionException {
 		BjtContext _localctx = new BjtContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_bjt);
+		enterRule(_localctx, 50, RULE_bjt);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(218); match(BJT);
-			setState(219); modtypeID();
-			setState(220); match(AT);
-			setState(221); match(OPENBRACKET);
-			setState(222); node();
-			setState(223); match(SEPARATOR);
-			setState(224); node();
-			setState(225); match(SEPARATOR);
-			setState(226); node();
-			setState(227); match(CLOSEBRACKET);
+			setState(221); match(BJT);
+			setState(222); modtypeID();
+			setState(223); match(AT);
+			setState(224); match(OPENBRACKET);
+			setState(225); node();
+			setState(226); match(SEPARATOR);
+			setState(227); node();
+			setState(228); match(SEPARATOR);
+			setState(229); node();
+			setState(230); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1451,20 +1489,20 @@ public class GrammarParser extends Parser {
 
 	public final MosfetContext mosfet() throws RecognitionException {
 		MosfetContext _localctx = new MosfetContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_mosfet);
+		enterRule(_localctx, 52, RULE_mosfet);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(229); match(MOS);
-			setState(230); modtypeID();
-			setState(231); match(AT);
-			setState(232); match(OPENBRACKET);
-			setState(233); node();
-			setState(234); match(SEPARATOR);
-			setState(235); node();
-			setState(236); match(SEPARATOR);
-			setState(237); node();
-			setState(238); match(CLOSEBRACKET);
+			setState(232); match(MOS);
+			setState(233); modtypeID();
+			setState(234); match(AT);
+			setState(235); match(OPENBRACKET);
+			setState(236); node();
+			setState(237); match(SEPARATOR);
+			setState(238); node();
+			setState(239); match(SEPARATOR);
+			setState(240); node();
+			setState(241); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1512,20 +1550,20 @@ public class GrammarParser extends Parser {
 
 	public final JfetContext jfet() throws RecognitionException {
 		JfetContext _localctx = new JfetContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_jfet);
+		enterRule(_localctx, 54, RULE_jfet);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(240); match(JFET);
-			setState(241); modtypeID();
-			setState(242); match(AT);
-			setState(243); match(OPENBRACKET);
-			setState(244); node();
-			setState(245); match(SEPARATOR);
-			setState(246); node();
-			setState(247); match(SEPARATOR);
-			setState(248); node();
-			setState(249); match(CLOSEBRACKET);
+			setState(243); match(JFET);
+			setState(244); modtypeID();
+			setState(245); match(AT);
+			setState(246); match(OPENBRACKET);
+			setState(247); node();
+			setState(248); match(SEPARATOR);
+			setState(249); node();
+			setState(250); match(SEPARATOR);
+			setState(251); node();
+			setState(252); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1566,16 +1604,16 @@ public class GrammarParser extends Parser {
 
 	public final ModelContext model() throws RecognitionException {
 		ModelContext _localctx = new ModelContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_model);
+		enterRule(_localctx, 56, RULE_model);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(251); match(MODEL);
-			setState(252); modtypeID();
-			setState(253); match(AT);
-			setState(254); match(OPENBRACKET);
-			setState(255); listnodes();
-			setState(256); match(CLOSEBRACKET);
+			setState(254); match(MODEL);
+			setState(255); modtypeID();
+			setState(256); match(AT);
+			setState(257); match(OPENBRACKET);
+			setState(258); listnodes();
+			setState(259); match(CLOSEBRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1608,12 +1646,12 @@ public class GrammarParser extends Parser {
 
 	public final NodeContext node() throws RecognitionException {
 		NodeContext _localctx = new NodeContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_node);
+		enterRule(_localctx, 58, RULE_node);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(258);
+			setState(261);
 			_la = _input.LA(1);
 			if ( !(_la==GND || _la==ID) ) {
 			_errHandler.recoverInline(this);
@@ -1653,21 +1691,21 @@ public class GrammarParser extends Parser {
 
 	public final ValueIDContext valueID() throws RecognitionException {
 		ValueIDContext _localctx = new ValueIDContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_valueID);
+		enterRule(_localctx, 60, RULE_valueID);
 		try {
-			setState(262);
+			setState(265);
 			switch (_input.LA(1)) {
 			case PI:
 			case VALUE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(260); newvalue();
+				setState(263); newvalue();
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(261); match(ID);
+				setState(264); match(ID);
 				}
 				break;
 			default:
@@ -1706,21 +1744,21 @@ public class GrammarParser extends Parser {
 
 	public final WaveIDContext waveID() throws RecognitionException {
 		WaveIDContext _localctx = new WaveIDContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_waveID);
+		enterRule(_localctx, 62, RULE_waveID);
 		try {
-			setState(266);
+			setState(269);
 			switch (_input.LA(1)) {
 			case DC:
 			case AC:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(264); newwave();
+				setState(267); newwave();
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(265); match(ID);
+				setState(268); match(ID);
 				}
 				break;
 			default:
@@ -1759,20 +1797,20 @@ public class GrammarParser extends Parser {
 
 	public final ModtypeIDContext modtypeID() throws RecognitionException {
 		ModtypeIDContext _localctx = new ModtypeIDContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_modtypeID);
+		enterRule(_localctx, 64, RULE_modtypeID);
 		try {
-			setState(270);
+			setState(273);
 			switch (_input.LA(1)) {
 			case MODTYPE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(268); newmod();
+				setState(271); newmod();
 				}
 				break;
 			case ID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(269); match(ID);
+				setState(272); match(ID);
 				}
 				break;
 			default:
@@ -1813,12 +1851,12 @@ public class GrammarParser extends Parser {
 
 	public final ListnodesContext listnodes() throws RecognitionException {
 		ListnodesContext _localctx = new ListnodesContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_listnodes);
+		enterRule(_localctx, 66, RULE_listnodes);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(272); node();
-			setState(273); listnodes2();
+			setState(275); node();
+			setState(276); listnodes2();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1856,18 +1894,18 @@ public class GrammarParser extends Parser {
 
 	public final Listnodes2Context listnodes2() throws RecognitionException {
 		Listnodes2Context _localctx = new Listnodes2Context(_ctx, getState());
-		enterRule(_localctx, 66, RULE_listnodes2);
+		enterRule(_localctx, 68, RULE_listnodes2);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(279);
+			setState(282);
 			_la = _input.LA(1);
 			if (_la==SEPARATOR) {
 				{
-				setState(275); match(SEPARATOR);
-				setState(276); node();
-				setState(277); listnodes2();
+				setState(278); match(SEPARATOR);
+				setState(279); node();
+				setState(280); listnodes2();
 				}
 			}
 
@@ -1905,12 +1943,12 @@ public class GrammarParser extends Parser {
 
 	public final SimContext sim() throws RecognitionException {
 		SimContext _localctx = new SimContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_sim);
+		enterRule(_localctx, 70, RULE_sim);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(281); match(SIMULATE);
-			setState(282); dirsim();
+			setState(284); match(SIMULATE);
+			setState(285); dirsim();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1947,17 +1985,17 @@ public class GrammarParser extends Parser {
 
 	public final DirsimContext dirsim() throws RecognitionException {
 		DirsimContext _localctx = new DirsimContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_dirsim);
+		enterRule(_localctx, 72, RULE_dirsim);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(287);
+			setState(290);
 			_la = _input.LA(1);
 			if (_la==DIRECTIVE) {
 				{
-				setState(284); newdir();
-				setState(285); dirsim();
+				setState(287); newdir();
+				setState(288); dirsim();
 				}
 			}
 
@@ -1992,11 +2030,11 @@ public class GrammarParser extends Parser {
 
 	public final NewdirContext newdir() throws RecognitionException {
 		NewdirContext _localctx = new NewdirContext(_ctx, getState());
-		enterRule(_localctx, 72, RULE_newdir);
+		enterRule(_localctx, 74, RULE_newdir);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(289); match(DIRECTIVE);
+			setState(292); match(DIRECTIVE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2011,96 +2049,96 @@ public class GrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\"\u0126\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\"\u0129\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
-		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\3\2\5\2N\n\2\3\2\3\2\3\3\3\3\3\3\3"+
-		"\3\5\3V\n\3\3\3\3\3\5\3Z\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\5\6e"+
-		"\n\6\3\7\3\7\3\b\3\b\3\b\3\t\3\t\3\t\5\to\n\t\3\n\3\n\3\n\3\n\3\13\3\13"+
-		"\3\13\5\13x\n\13\3\f\3\f\5\f|\n\f\3\f\5\f\177\n\f\3\r\3\r\5\r\u0083\n"+
-		"\r\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\20\3"+
-		"\20\3\21\3\21\3\21\3\22\3\22\3\22\5\22\u0099\n\22\3\23\3\23\3\23\3\23"+
-		"\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00a5\n\23\3\24\3\24\3\24\3\24\3\24"+
-		"\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\3\27"+
-		"\3\27\3\27\3\27\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\31\3\31"+
-		"\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\32"+
-		"\3\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
-		"\3\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\35\3\35"+
-		"\3\35\3\35\3\35\3\35\3\35\3\36\3\36\3\37\3\37\5\37\u0109\n\37\3 \3 \5"+
-		" \u010d\n \3!\3!\5!\u0111\n!\3\"\3\"\3\"\3#\3#\3#\3#\5#\u011a\n#\3$\3"+
-		"$\3$\3%\3%\3%\5%\u0122\n%\3&\3&\3&\2\2\'\2\4\6\b\n\f\16\20\22\24\26\30"+
-		"\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJ\2\3\4\2\17\17!!\u011b\2M\3\2"+
-		"\2\2\4Y\3\2\2\2\6[\3\2\2\2\b^\3\2\2\2\nd\3\2\2\2\ff\3\2\2\2\16h\3\2\2"+
-		"\2\20n\3\2\2\2\22p\3\2\2\2\24w\3\2\2\2\26~\3\2\2\2\30\u0082\3\2\2\2\32"+
-		"\u0084\3\2\2\2\34\u0089\3\2\2\2\36\u0090\3\2\2\2 \u0092\3\2\2\2\"\u0098"+
-		"\3\2\2\2$\u00a4\3\2\2\2&\u00a6\3\2\2\2(\u00af\3\2\2\2*\u00b8\3\2\2\2,"+
-		"\u00c1\3\2\2\2.\u00ca\3\2\2\2\60\u00d3\3\2\2\2\62\u00dc\3\2\2\2\64\u00e7"+
-		"\3\2\2\2\66\u00f2\3\2\2\28\u00fd\3\2\2\2:\u0104\3\2\2\2<\u0108\3\2\2\2"+
-		">\u010c\3\2\2\2@\u0110\3\2\2\2B\u0112\3\2\2\2D\u0119\3\2\2\2F\u011b\3"+
-		"\2\2\2H\u0121\3\2\2\2J\u0123\3\2\2\2LN\5\6\4\2ML\3\2\2\2MN\3\2\2\2NO\3"+
-		"\2\2\2OP\5\4\3\2P\3\3\2\2\2QV\5\b\5\2RV\5\16\b\2SV\5 \21\2TV\5F$\2UQ\3"+
-		"\2\2\2UR\3\2\2\2US\3\2\2\2UT\3\2\2\2VW\3\2\2\2WX\5\4\3\2XZ\3\2\2\2YU\3"+
-		"\2\2\2YZ\3\2\2\2Z\5\3\2\2\2[\\\7\b\2\2\\]\7!\2\2]\7\3\2\2\2^_\7\t\2\2"+
-		"_`\5\n\6\2`\t\3\2\2\2ab\5\f\7\2bc\5\n\6\2ce\3\2\2\2da\3\2\2\2de\3\2\2"+
-		"\2e\13\3\2\2\2fg\7\36\2\2g\r\3\2\2\2hi\7\n\2\2ij\5\20\t\2j\17\3\2\2\2"+
-		"kl\5\22\n\2lm\5\20\t\2mo\3\2\2\2nk\3\2\2\2no\3\2\2\2o\21\3\2\2\2pq\7!"+
-		"\2\2qr\7\23\2\2rs\5\24\13\2s\23\3\2\2\2tx\5\26\f\2ux\5\30\r\2vx\5\36\20"+
-		"\2wt\3\2\2\2wu\3\2\2\2wv\3\2\2\2x\25\3\2\2\2y{\7\37\2\2z|\7\35\2\2{z\3"+
-		"\2\2\2{|\3\2\2\2|\177\3\2\2\2}\177\7\22\2\2~y\3\2\2\2~}\3\2\2\2\177\27"+
-		"\3\2\2\2\u0080\u0083\5\32\16\2\u0081\u0083\5\34\17\2\u0082\u0080\3\2\2"+
-		"\2\u0082\u0081\3\2\2\2\u0083\31\3\2\2\2\u0084\u0085\7\20\2\2\u0085\u0086"+
-		"\7\5\2\2\u0086\u0087\5<\37\2\u0087\u0088\7\6\2\2\u0088\33\3\2\2\2\u0089"+
-		"\u008a\7\21\2\2\u008a\u008b\7\5\2\2\u008b\u008c\5<\37\2\u008c\u008d\7"+
-		"\7\2\2\u008d\u008e\5<\37\2\u008e\u008f\7\6\2\2\u008f\35\3\2\2\2\u0090"+
-		"\u0091\7 \2\2\u0091\37\3\2\2\2\u0092\u0093\7\13\2\2\u0093\u0094\5\"\22"+
-		"\2\u0094!\3\2\2\2\u0095\u0096\5$\23\2\u0096\u0097\5\"\22\2\u0097\u0099"+
-		"\3\2\2\2\u0098\u0095\3\2\2\2\u0098\u0099\3\2\2\2\u0099#\3\2\2\2\u009a"+
-		"\u00a5\5&\24\2\u009b\u00a5\5(\25\2\u009c\u00a5\5*\26\2\u009d\u00a5\5,"+
-		"\27\2\u009e\u00a5\5.\30\2\u009f\u00a5\5\60\31\2\u00a0\u00a5\5\62\32\2"+
-		"\u00a1\u00a5\5\64\33\2\u00a2\u00a5\5\66\34\2\u00a3\u00a5\58\35\2\u00a4"+
-		"\u009a\3\2\2\2\u00a4\u009b\3\2\2\2\u00a4\u009c\3\2\2\2\u00a4\u009d\3\2"+
-		"\2\2\u00a4\u009e\3\2\2\2\u00a4\u009f\3\2\2\2\u00a4\u00a0\3\2\2\2\u00a4"+
-		"\u00a1\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a4\u00a3\3\2\2\2\u00a5%\3\2\2\2"+
-		"\u00a6\u00a7\7\24\2\2\u00a7\u00a8\5<\37\2\u00a8\u00a9\7\r\2\2\u00a9\u00aa"+
-		"\7\5\2\2\u00aa\u00ab\5:\36\2\u00ab\u00ac\7\7\2\2\u00ac\u00ad\5:\36\2\u00ad"+
-		"\u00ae\7\6\2\2\u00ae\'\3\2\2\2\u00af\u00b0\7\25\2\2\u00b0\u00b1\5<\37"+
-		"\2\u00b1\u00b2\7\r\2\2\u00b2\u00b3\7\5\2\2\u00b3\u00b4\5:\36\2\u00b4\u00b5"+
-		"\7\7\2\2\u00b5\u00b6\5:\36\2\u00b6\u00b7\7\6\2\2\u00b7)\3\2\2\2\u00b8"+
-		"\u00b9\7\26\2\2\u00b9\u00ba\5<\37\2\u00ba\u00bb\7\r\2\2\u00bb\u00bc\7"+
-		"\5\2\2\u00bc\u00bd\5:\36\2\u00bd\u00be\7\7\2\2\u00be\u00bf\5:\36\2\u00bf"+
-		"\u00c0\7\6\2\2\u00c0+\3\2\2\2\u00c1\u00c2\7\27\2\2\u00c2\u00c3\5> \2\u00c3"+
-		"\u00c4\7\r\2\2\u00c4\u00c5\7\5\2\2\u00c5\u00c6\5:\36\2\u00c6\u00c7\7\7"+
-		"\2\2\u00c7\u00c8\5:\36\2\u00c8\u00c9\7\6\2\2\u00c9-\3\2\2\2\u00ca\u00cb"+
-		"\7\30\2\2\u00cb\u00cc\5> \2\u00cc\u00cd\7\r\2\2\u00cd\u00ce\7\5\2\2\u00ce"+
-		"\u00cf\5:\36\2\u00cf\u00d0\7\7\2\2\u00d0\u00d1\5:\36\2\u00d1\u00d2\7\6"+
-		"\2\2\u00d2/\3\2\2\2\u00d3\u00d4\7\31\2\2\u00d4\u00d5\5@!\2\u00d5\u00d6"+
-		"\7\r\2\2\u00d6\u00d7\7\5\2\2\u00d7\u00d8\5:\36\2\u00d8\u00d9\7\7\2\2\u00d9"+
-		"\u00da\5:\36\2\u00da\u00db\7\6\2\2\u00db\61\3\2\2\2\u00dc\u00dd\7\32\2"+
-		"\2\u00dd\u00de\5@!\2\u00de\u00df\7\r\2\2\u00df\u00e0\7\5\2\2\u00e0\u00e1"+
-		"\5:\36\2\u00e1\u00e2\7\7\2\2\u00e2\u00e3\5:\36\2\u00e3\u00e4\7\7\2\2\u00e4"+
-		"\u00e5\5:\36\2\u00e5\u00e6\7\6\2\2\u00e6\63\3\2\2\2\u00e7\u00e8\7\33\2"+
-		"\2\u00e8\u00e9\5@!\2\u00e9\u00ea\7\r\2\2\u00ea\u00eb\7\5\2\2\u00eb\u00ec"+
-		"\5:\36\2\u00ec\u00ed\7\7\2\2\u00ed\u00ee\5:\36\2\u00ee\u00ef\7\7\2\2\u00ef"+
-		"\u00f0\5:\36\2\u00f0\u00f1\7\6\2\2\u00f1\65\3\2\2\2\u00f2\u00f3\7\34\2"+
-		"\2\u00f3\u00f4\5@!\2\u00f4\u00f5\7\r\2\2\u00f5\u00f6\7\5\2\2\u00f6\u00f7"+
-		"\5:\36\2\u00f7\u00f8\7\7\2\2\u00f8\u00f9\5:\36\2\u00f9\u00fa\7\7\2\2\u00fa"+
-		"\u00fb\5:\36\2\u00fb\u00fc\7\6\2\2\u00fc\67\3\2\2\2\u00fd\u00fe\7\16\2"+
-		"\2\u00fe\u00ff\5@!\2\u00ff\u0100\7\r\2\2\u0100\u0101\7\5\2\2\u0101\u0102"+
-		"\5B\"\2\u0102\u0103\7\6\2\2\u01039\3\2\2\2\u0104\u0105\t\2\2\2\u0105;"+
-		"\3\2\2\2\u0106\u0109\5\26\f\2\u0107\u0109\7!\2\2\u0108\u0106\3\2\2\2\u0108"+
-		"\u0107\3\2\2\2\u0109=\3\2\2\2\u010a\u010d\5\30\r\2\u010b\u010d\7!\2\2"+
-		"\u010c\u010a\3\2\2\2\u010c\u010b\3\2\2\2\u010d?\3\2\2\2\u010e\u0111\5"+
-		"\36\20\2\u010f\u0111\7!\2\2\u0110\u010e\3\2\2\2\u0110\u010f\3\2\2\2\u0111"+
-		"A\3\2\2\2\u0112\u0113\5:\36\2\u0113\u0114\5D#\2\u0114C\3\2\2\2\u0115\u0116"+
-		"\7\7\2\2\u0116\u0117\5:\36\2\u0117\u0118\5D#\2\u0118\u011a\3\2\2\2\u0119"+
-		"\u0115\3\2\2\2\u0119\u011a\3\2\2\2\u011aE\3\2\2\2\u011b\u011c\7\f\2\2"+
-		"\u011c\u011d\5H%\2\u011dG\3\2\2\2\u011e\u011f\5J&\2\u011f\u0120\5H%\2"+
-		"\u0120\u0122\3\2\2\2\u0121\u011e\3\2\2\2\u0121\u0122\3\2\2\2\u0122I\3"+
-		"\2\2\2\u0123\u0124\7\"\2\2\u0124K\3\2\2\2\22MUYdnw{~\u0082\u0098\u00a4"+
-		"\u0108\u010c\u0110\u0119\u0121";
+		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\3\2\5\2P\n\2\3\2\3\2\3\3\3"+
+		"\3\3\3\3\3\5\3X\n\3\3\3\3\3\5\3\\\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6"+
+		"\3\6\5\6g\n\6\3\7\3\7\3\b\3\b\3\b\3\t\3\t\3\t\5\tq\n\t\3\n\3\n\3\n\3\n"+
+		"\3\13\3\13\3\13\5\13z\n\13\3\f\3\f\3\f\5\f\177\n\f\3\r\5\r\u0082\n\r\3"+
+		"\16\3\16\5\16\u0086\n\16\3\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20"+
+		"\3\20\3\20\3\20\3\21\3\21\3\22\3\22\3\22\3\23\3\23\3\23\5\23\u009c\n\23"+
+		"\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\5\24\u00a8\n\24\3\25"+
+		"\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\26\3\26\3\26"+
+		"\3\26\3\26\3\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\30\3\30"+
+		"\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\31\3\31\3\31"+
+		"\3\31\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\33\3\33\3\33"+
+		"\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3\34\3\34\3\34"+
+		"\3\34\3\34\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35\3\35"+
+		"\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\37\3\37\3 \3 \5 \u010c"+
+		"\n \3!\3!\5!\u0110\n!\3\"\3\"\5\"\u0114\n\"\3#\3#\3#\3$\3$\3$\3$\5$\u011d"+
+		"\n$\3%\3%\3%\3&\3&\3&\5&\u0125\n&\3\'\3\'\3\'\2\2(\2\4\6\b\n\f\16\20\22"+
+		"\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJL\2\3\4\2\17\17!!\u011d"+
+		"\2O\3\2\2\2\4[\3\2\2\2\6]\3\2\2\2\b`\3\2\2\2\nf\3\2\2\2\fh\3\2\2\2\16"+
+		"j\3\2\2\2\20p\3\2\2\2\22r\3\2\2\2\24y\3\2\2\2\26~\3\2\2\2\30\u0081\3\2"+
+		"\2\2\32\u0085\3\2\2\2\34\u0087\3\2\2\2\36\u008c\3\2\2\2 \u0093\3\2\2\2"+
+		"\"\u0095\3\2\2\2$\u009b\3\2\2\2&\u00a7\3\2\2\2(\u00a9\3\2\2\2*\u00b2\3"+
+		"\2\2\2,\u00bb\3\2\2\2.\u00c4\3\2\2\2\60\u00cd\3\2\2\2\62\u00d6\3\2\2\2"+
+		"\64\u00df\3\2\2\2\66\u00ea\3\2\2\28\u00f5\3\2\2\2:\u0100\3\2\2\2<\u0107"+
+		"\3\2\2\2>\u010b\3\2\2\2@\u010f\3\2\2\2B\u0113\3\2\2\2D\u0115\3\2\2\2F"+
+		"\u011c\3\2\2\2H\u011e\3\2\2\2J\u0124\3\2\2\2L\u0126\3\2\2\2NP\5\6\4\2"+
+		"ON\3\2\2\2OP\3\2\2\2PQ\3\2\2\2QR\5\4\3\2R\3\3\2\2\2SX\5\b\5\2TX\5\16\b"+
+		"\2UX\5\"\22\2VX\5H%\2WS\3\2\2\2WT\3\2\2\2WU\3\2\2\2WV\3\2\2\2XY\3\2\2"+
+		"\2YZ\5\4\3\2Z\\\3\2\2\2[W\3\2\2\2[\\\3\2\2\2\\\5\3\2\2\2]^\7\b\2\2^_\7"+
+		"!\2\2_\7\3\2\2\2`a\7\t\2\2ab\5\n\6\2b\t\3\2\2\2cd\5\f\7\2de\5\n\6\2eg"+
+		"\3\2\2\2fc\3\2\2\2fg\3\2\2\2g\13\3\2\2\2hi\7\36\2\2i\r\3\2\2\2jk\7\n\2"+
+		"\2kl\5\20\t\2l\17\3\2\2\2mn\5\22\n\2no\5\20\t\2oq\3\2\2\2pm\3\2\2\2pq"+
+		"\3\2\2\2q\21\3\2\2\2rs\7!\2\2st\7\23\2\2tu\5\24\13\2u\23\3\2\2\2vz\5\26"+
+		"\f\2wz\5\32\16\2xz\5 \21\2yv\3\2\2\2yw\3\2\2\2yx\3\2\2\2z\25\3\2\2\2{"+
+		"|\7\37\2\2|\177\5\30\r\2}\177\7\22\2\2~{\3\2\2\2~}\3\2\2\2\177\27\3\2"+
+		"\2\2\u0080\u0082\7\35\2\2\u0081\u0080\3\2\2\2\u0081\u0082\3\2\2\2\u0082"+
+		"\31\3\2\2\2\u0083\u0086\5\34\17\2\u0084\u0086\5\36\20\2\u0085\u0083\3"+
+		"\2\2\2\u0085\u0084\3\2\2\2\u0086\33\3\2\2\2\u0087\u0088\7\20\2\2\u0088"+
+		"\u0089\7\5\2\2\u0089\u008a\5> \2\u008a\u008b\7\6\2\2\u008b\35\3\2\2\2"+
+		"\u008c\u008d\7\21\2\2\u008d\u008e\7\5\2\2\u008e\u008f\5> \2\u008f\u0090"+
+		"\7\7\2\2\u0090\u0091\5> \2\u0091\u0092\7\6\2\2\u0092\37\3\2\2\2\u0093"+
+		"\u0094\7 \2\2\u0094!\3\2\2\2\u0095\u0096\7\13\2\2\u0096\u0097\5$\23\2"+
+		"\u0097#\3\2\2\2\u0098\u0099\5&\24\2\u0099\u009a\5$\23\2\u009a\u009c\3"+
+		"\2\2\2\u009b\u0098\3\2\2\2\u009b\u009c\3\2\2\2\u009c%\3\2\2\2\u009d\u00a8"+
+		"\5(\25\2\u009e\u00a8\5*\26\2\u009f\u00a8\5,\27\2\u00a0\u00a8\5.\30\2\u00a1"+
+		"\u00a8\5\60\31\2\u00a2\u00a8\5\62\32\2\u00a3\u00a8\5\64\33\2\u00a4\u00a8"+
+		"\5\66\34\2\u00a5\u00a8\58\35\2\u00a6\u00a8\5:\36\2\u00a7\u009d\3\2\2\2"+
+		"\u00a7\u009e\3\2\2\2\u00a7\u009f\3\2\2\2\u00a7\u00a0\3\2\2\2\u00a7\u00a1"+
+		"\3\2\2\2\u00a7\u00a2\3\2\2\2\u00a7\u00a3\3\2\2\2\u00a7\u00a4\3\2\2\2\u00a7"+
+		"\u00a5\3\2\2\2\u00a7\u00a6\3\2\2\2\u00a8\'\3\2\2\2\u00a9\u00aa\7\24\2"+
+		"\2\u00aa\u00ab\5> \2\u00ab\u00ac\7\r\2\2\u00ac\u00ad\7\5\2\2\u00ad\u00ae"+
+		"\5<\37\2\u00ae\u00af\7\7\2\2\u00af\u00b0\5<\37\2\u00b0\u00b1\7\6\2\2\u00b1"+
+		")\3\2\2\2\u00b2\u00b3\7\25\2\2\u00b3\u00b4\5> \2\u00b4\u00b5\7\r\2\2\u00b5"+
+		"\u00b6\7\5\2\2\u00b6\u00b7\5<\37\2\u00b7\u00b8\7\7\2\2\u00b8\u00b9\5<"+
+		"\37\2\u00b9\u00ba\7\6\2\2\u00ba+\3\2\2\2\u00bb\u00bc\7\26\2\2\u00bc\u00bd"+
+		"\5> \2\u00bd\u00be\7\r\2\2\u00be\u00bf\7\5\2\2\u00bf\u00c0\5<\37\2\u00c0"+
+		"\u00c1\7\7\2\2\u00c1\u00c2\5<\37\2\u00c2\u00c3\7\6\2\2\u00c3-\3\2\2\2"+
+		"\u00c4\u00c5\7\27\2\2\u00c5\u00c6\5@!\2\u00c6\u00c7\7\r\2\2\u00c7\u00c8"+
+		"\7\5\2\2\u00c8\u00c9\5<\37\2\u00c9\u00ca\7\7\2\2\u00ca\u00cb\5<\37\2\u00cb"+
+		"\u00cc\7\6\2\2\u00cc/\3\2\2\2\u00cd\u00ce\7\30\2\2\u00ce\u00cf\5@!\2\u00cf"+
+		"\u00d0\7\r\2\2\u00d0\u00d1\7\5\2\2\u00d1\u00d2\5<\37\2\u00d2\u00d3\7\7"+
+		"\2\2\u00d3\u00d4\5<\37\2\u00d4\u00d5\7\6\2\2\u00d5\61\3\2\2\2\u00d6\u00d7"+
+		"\7\31\2\2\u00d7\u00d8\5B\"\2\u00d8\u00d9\7\r\2\2\u00d9\u00da\7\5\2\2\u00da"+
+		"\u00db\5<\37\2\u00db\u00dc\7\7\2\2\u00dc\u00dd\5<\37\2\u00dd\u00de\7\6"+
+		"\2\2\u00de\63\3\2\2\2\u00df\u00e0\7\32\2\2\u00e0\u00e1\5B\"\2\u00e1\u00e2"+
+		"\7\r\2\2\u00e2\u00e3\7\5\2\2\u00e3\u00e4\5<\37\2\u00e4\u00e5\7\7\2\2\u00e5"+
+		"\u00e6\5<\37\2\u00e6\u00e7\7\7\2\2\u00e7\u00e8\5<\37\2\u00e8\u00e9\7\6"+
+		"\2\2\u00e9\65\3\2\2\2\u00ea\u00eb\7\33\2\2\u00eb\u00ec\5B\"\2\u00ec\u00ed"+
+		"\7\r\2\2\u00ed\u00ee\7\5\2\2\u00ee\u00ef\5<\37\2\u00ef\u00f0\7\7\2\2\u00f0"+
+		"\u00f1\5<\37\2\u00f1\u00f2\7\7\2\2\u00f2\u00f3\5<\37\2\u00f3\u00f4\7\6"+
+		"\2\2\u00f4\67\3\2\2\2\u00f5\u00f6\7\34\2\2\u00f6\u00f7\5B\"\2\u00f7\u00f8"+
+		"\7\r\2\2\u00f8\u00f9\7\5\2\2\u00f9\u00fa\5<\37\2\u00fa\u00fb\7\7\2\2\u00fb"+
+		"\u00fc\5<\37\2\u00fc\u00fd\7\7\2\2\u00fd\u00fe\5<\37\2\u00fe\u00ff\7\6"+
+		"\2\2\u00ff9\3\2\2\2\u0100\u0101\7\16\2\2\u0101\u0102\5B\"\2\u0102\u0103"+
+		"\7\r\2\2\u0103\u0104\7\5\2\2\u0104\u0105\5D#\2\u0105\u0106\7\6\2\2\u0106"+
+		";\3\2\2\2\u0107\u0108\t\2\2\2\u0108=\3\2\2\2\u0109\u010c\5\26\f\2\u010a"+
+		"\u010c\7!\2\2\u010b\u0109\3\2\2\2\u010b\u010a\3\2\2\2\u010c?\3\2\2\2\u010d"+
+		"\u0110\5\32\16\2\u010e\u0110\7!\2\2\u010f\u010d\3\2\2\2\u010f\u010e\3"+
+		"\2\2\2\u0110A\3\2\2\2\u0111\u0114\5 \21\2\u0112\u0114\7!\2\2\u0113\u0111"+
+		"\3\2\2\2\u0113\u0112\3\2\2\2\u0114C\3\2\2\2\u0115\u0116\5<\37\2\u0116"+
+		"\u0117\5F$\2\u0117E\3\2\2\2\u0118\u0119\7\7\2\2\u0119\u011a\5<\37\2\u011a"+
+		"\u011b\5F$\2\u011b\u011d\3\2\2\2\u011c\u0118\3\2\2\2\u011c\u011d\3\2\2"+
+		"\2\u011dG\3\2\2\2\u011e\u011f\7\f\2\2\u011f\u0120\5J&\2\u0120I\3\2\2\2"+
+		"\u0121\u0122\5L\'\2\u0122\u0123\5J&\2\u0123\u0125\3\2\2\2\u0124\u0121"+
+		"\3\2\2\2\u0124\u0125\3\2\2\2\u0125K\3\2\2\2\u0126\u0127\7\"\2\2\u0127"+
+		"M\3\2\2\2\22OW[fpy~\u0081\u0085\u009b\u00a7\u010b\u010f\u0113\u011c\u0124";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

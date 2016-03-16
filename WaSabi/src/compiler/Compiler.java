@@ -12,7 +12,7 @@ import grammar.GrammarLexer;
 import grammar.GrammarParser;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.BailErrorStrategy;
+//import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
@@ -28,9 +28,8 @@ import constants.ModelType;
 import constants.Value;
 import constants.Waveform;
 
-
 /**
- *Parses a WaSabi file.
+ * Parses a WaSabi file.
  */
 public class Compiler extends GrammarBaseListener {
 
@@ -38,7 +37,7 @@ public class Compiler extends GrammarBaseListener {
 	 * Tokens detected in the parsed file.
 	 */
 	private CommonTokenStream tokens;
-	
+
 	/**
 	 * Syntax tree of the parsed file.
 	 */
@@ -53,7 +52,6 @@ public class Compiler extends GrammarBaseListener {
 			System.out.println(ts.get(i).getText() + "\t[" + ts.get(i).getType() + "]");
 	}
 
-	
 	/**
 	 * Prints the syntax tree in the console.
 	 */
@@ -63,9 +61,15 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Initializes a new compiler instance.
-	 * @param path <String> The path of the file that will be parsed
-	 * @throws IOException Throws an {@link IOException} if error are encountered opening/reading the file.
-	 * @throws SemanticException Throws a {@link SemanticException} if semantic errors are found in the file.
+	 * 
+	 * @param path
+	 *            <String> The path of the file that will be parsed
+	 * @throws IOException
+	 *             Throws an {@link IOException} if error are encountered
+	 *             opening/reading the file.
+	 * @throws SemanticException
+	 *             Throws a {@link SemanticException} if semantic errors are
+	 *             found in the file.
 	 */
 	public Compiler(String path) throws IOException, SemanticException {
 		// Lexer
@@ -76,7 +80,7 @@ public class Compiler extends GrammarBaseListener {
 
 		// Parser
 		GrammarParser parser = new GrammarParser(tokens);
-		parser.setErrorHandler(new BailErrorStrategy());
+		// parser.setErrorHandler(new BailErrorStrategy());
 		syntaxTree = parser.axiom();
 
 		exceptions = new Vector<SemanticException>();
@@ -129,7 +133,10 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Throws all the exceptions raised during the parsing process
-	 * @throws SemanticException This method can throw a SemanticException if semantic errors are found in the file
+	 * 
+	 * @throws SemanticException
+	 *             This method can throw a SemanticException if semantic errors
+	 *             are found in the file
 	 */
 	public void throwException() throws SemanticException {
 		for (SemanticException se : exceptions)
@@ -148,7 +155,6 @@ public class Compiler extends GrammarBaseListener {
 				throw new FloatingNodeException(nodes.get(i));
 	}
 
-	
 	// Title
 	/**
 	 * Internal variable; true if the circuit has a title.
@@ -160,8 +166,11 @@ public class Compiler extends GrammarBaseListener {
 	private String title;
 
 	/**
-	 * Executes at the end of a Title context; extracts the title from the context. 
-	 * @param ctx Context of a title (a sub syntax tree with title as root).
+	 * Executes at the end of a Title context; extracts the title from the
+	 * context.
+	 * 
+	 * @param ctx
+	 *            Context of a title (a sub syntax tree with title as root).
 	 */
 	@Override
 	public void exitTitle(grammar.GrammarParser.TitleContext ctx) {
@@ -181,8 +190,12 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints the title to file. Used to generate the SPICE .cir file.
-	 * @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampTitle(FileWriter writer) throws IOException {
 		if (isTit)
@@ -202,8 +215,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<String> librarys;
 
 	/**
-	 * Executes at the start of a libraries context; extracts the libraries paths from the context.
-	 * @param ctx Context of a libraries (a sub syntax tree with libraries as root).
+	 * Executes at the start of a libraries context; extracts the libraries
+	 * paths from the context.
+	 * 
+	 * @param ctx
+	 *            Context of a libraries (a sub syntax tree with libraries as
+	 *            root).
 	 */
 	@Override
 	public void enterNewlib(grammar.GrammarParser.NewlibContext ctx) {
@@ -230,8 +247,12 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints the libraries to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampLib(FileWriter writer) throws IOException {
 		for (String s : librarys) {
@@ -249,6 +270,7 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Resets the last declared model.
+	 * 
 	 * @see lastModelType
 	 */
 	private void resetLastModelType() {
@@ -256,8 +278,12 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Executes at the end of a model declaration context; extracts the model type from the context.
-	 * @param ctx Context of a model declaration (a sub syntax tree with model declaration as root).
+	 * Executes at the end of a model declaration context; extracts the model
+	 * type from the context.
+	 * 
+	 * @param ctx
+	 *            Context of a model declaration (a sub syntax tree with model
+	 *            declaration as root).
 	 */
 	@Override
 	public void exitNewmod(grammar.GrammarParser.NewmodContext ctx) {
@@ -265,8 +291,12 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Executes at the end of a model usage context; extracts the name and model type from the context.
-	 * @param ctx Context of a model usage (a sub syntax tree with model usage as root).
+	 * Executes at the end of a model usage context; extracts the name and model
+	 * type from the context.
+	 * 
+	 * @param ctx
+	 *            Context of a model usage (a sub syntax tree with model usage
+	 *            as root).
 	 */
 	@Override
 	public void exitModtypeID(grammar.GrammarParser.ModtypeIDContext ctx) {
@@ -295,6 +325,10 @@ public class Compiler extends GrammarBaseListener {
 
 	// Value
 	/**
+	 * Internal variable; stores the last declared unit.
+	 */
+	private String lastUnit;
+	/**
 	 * Internal variable; stores the last declared value.
 	 */
 	private Value lastValue;
@@ -303,28 +337,41 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	private String lastValueID1;
 	/**
-	 * Internal variable; stores the last used value.
-	 * There are cases where 2 values are used at the same time; this variable is used in those cases.
+	 * Internal variable; stores the last used value. There are cases where 2
+	 * values are used at the same time; this variable is used in those cases.
+	 * 
 	 * @see lastValueID1
 	 */
 	private String lastValueID2;
 
 	/**
 	 * Resets the last declared/used value.
+	 * 
 	 * @see lastValue
 	 * @see lastValueID1
 	 * @see lastValueID2
+	 * @see lastUnit
 	 */
 	private void resetLastValue() {
 		lastValue = null;
 		lastValueID1 = null;
 		lastValueID2 = null;
-
+		lastUnit = "";
+	}
+//TODO
+	@Override
+	public void exitUnits(grammar.GrammarParser.UnitsContext ctx) {
+		if (ctx.UNIT() != null)
+			lastUnit = ctx.UNIT().getText();
 	}
 
 	/**
-	 * Executes at the end of a value declaration context; extracts the numeric value from the context.
-	 * @param ctx Context of a value declaration (a sub syntax tree with value declaration as root).
+	 * Executes at the end of a value declaration context; extracts the numeric
+	 * value from the context.
+	 * 
+	 * @param ctx
+	 *            Context of a value declaration (a sub syntax tree with value
+	 *            declaration as root).
 	 */
 	@Override
 	public void exitNewvalue(grammar.GrammarParser.NewvalueContext ctx) {
@@ -335,18 +382,17 @@ public class Compiler extends GrammarBaseListener {
 			else
 				lastValue = new Value(Math.PI * Float.parseFloat(pi), "");
 		}
-		else {
-			String exp = "";
-			if (ctx.UNIT() != null)
-				exp = ctx.UNIT().getText();
-
-			lastValue = new Value(Float.parseFloat(ctx.VALUE().getText()), exp);
-		}
+		else
+			lastValue = new Value(Float.parseFloat(ctx.VALUE().getText()), lastUnit);
 	}
 
 	/**
-	 * Executes at the end of a value usage context; extracts the name and value from the context.
-	 * @param ctx Context of a value usage (a sub syntax tree with value usage as root).
+	 * Executes at the end of a value usage context; extracts the name and value
+	 * from the context.
+	 * 
+	 * @param ctx
+	 *            Context of a value usage (a sub syntax tree with value usage
+	 *            as root).
 	 */
 	@Override
 	public void exitValueID(grammar.GrammarParser.ValueIDContext ctx) {
@@ -384,6 +430,7 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Resets the last declared waveform.
+	 * 
 	 * @see lastWaveform
 	 */
 	private void resetLastWaveform() {
@@ -391,8 +438,12 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Executes at the end of a DC waveform declaration context; extracts the magnitude from the context.
-	 * @param ctx Context of the waveform declaration (a sub syntax tree with waveform declaration as root).
+	 * Executes at the end of a DC waveform declaration context; extracts the
+	 * magnitude from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the waveform declaration (a sub syntax tree with
+	 *            waveform declaration as root).
 	 */
 	@Override
 	public void exitNewwaveDC(grammar.GrammarParser.NewwaveDCContext ctx) {
@@ -401,8 +452,12 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Executes at the end of an AC waveform declaration context; extracts the magnitude and phase from the context.
-	 * @param ctx Context of the waveform declaration (a sub syntax tree with waveform declaration as root).
+	 * Executes at the end of an AC waveform declaration context; extracts the
+	 * magnitude and phase from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the waveform declaration (a sub syntax tree with
+	 *            waveform declaration as root).
 	 */
 	@Override
 	public void exitNewwaveAC(grammar.GrammarParser.NewwaveACContext ctx) {
@@ -412,8 +467,12 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Executes at the end of a waveform usage context; extracts the name and magnitude (and phase, if present) from the context.
-	 * @param ctx Context of the waveform usage (a sub syntax tree with waveform usage as root).
+	 * Executes at the end of a waveform usage context; extracts the name and
+	 * magnitude (and phase, if present) from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the waveform usage (a sub syntax tree with waveform
+	 *            usage as root).
 	 */
 	@Override
 	public void exitWaveID(grammar.GrammarParser.WaveIDContext ctx) {
@@ -448,8 +507,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<Constant> constants = new Vector<Constant>();
 
 	/**
-	 * Executes at the end of a constant declaration context; extracts the name and the value (or model, or Waveform) from the context.
-	 * @param ctx Context of the constant declaration (a sub syntax tree with constant declaration as root).
+	 * Executes at the end of a constant declaration context; extracts the name
+	 * and the value (or model, or Waveform) from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the constant declaration (a sub syntax tree with
+	 *            constant declaration as root).
 	 */
 	@Override
 	public void exitNewconst(grammar.GrammarParser.NewconstContext ctx) {
@@ -524,6 +587,7 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Resets the list of the encountered nodes.
+	 * 
 	 * @see newNodes
 	 */
 	private void resetNewNodes() {
@@ -531,8 +595,11 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Executes at the end of a node context; extracts the number of the node (and eventually if the node is GND) from the context.
-	 * @param ctx Context of the node (a sub syntax tree with node as root).
+	 * Executes at the end of a node context; extracts the number of the node
+	 * (and eventually if the node is GND) from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the node (a sub syntax tree with node as root).
 	 */
 	@Override
 	public void exitNode(grammar.GrammarParser.NodeContext ctx) {
@@ -563,8 +630,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<PassiveBipole> resistances;
 
 	/**
-	 * Executes at the end of a resistance context; extracts the value and connected nodes from the context.
-	 * @param ctx Context of the resistance (a sub syntax tree with resistance as root).
+	 * Executes at the end of a resistance context; extracts the value and
+	 * connected nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the resistance (a sub syntax tree with resistance
+	 *            as root).
 	 */
 	@Override
 	public void exitResistance(grammar.GrammarParser.ResistanceContext ctx) {
@@ -594,9 +665,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of resistances to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of resistances to file. Used to generate the SPICE .cir
+	 * file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampRes(FileWriter writer) throws IOException {
 		int i = 1;
@@ -614,11 +690,15 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<PassiveBipole> capacitors;
 
 	/**
-	 * Executes at the end of a capacitor context; extracts the value and connected nodes from the context.
-	 * @param ctx Context of the capacitor (a sub syntax tree with capacitor as root).
+	 * Executes at the end of a capacitor context; extracts the value and
+	 * connected nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the capacitor (a sub syntax tree with capacitor as
+	 *            root).
 	 */
 	@Override
-	public void exitCapaticance(grammar.GrammarParser.CapaticanceContext ctx) {
+	public void exitCapacitance(grammar.GrammarParser.CapacitanceContext ctx) {
 		if (newNodes.get(0) == newNodes.get(1))
 			exceptions.add(new SameNodeException(ctx.CAP().getSymbol()));
 
@@ -645,9 +725,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of capacitors to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of capacitors to file. Used to generate the SPICE .cir
+	 * file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampCap(FileWriter writer) throws IOException {
 		int i = 1;
@@ -665,8 +750,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<PassiveBipole> inductances;
 
 	/**
-	 * Executes at the end of a inductance context; extracts the value and connected nodes from the context.
-	 * @param ctx Context of the inductance (a sub syntax tree with inductance as root).
+	 * Executes at the end of a inductance context; extracts the value and
+	 * connected nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the inductance (a sub syntax tree with inductance
+	 *            as root).
 	 */
 	@Override
 	public void exitInductance(grammar.GrammarParser.InductanceContext ctx) {
@@ -696,9 +785,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of inductances to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of inductances to file. Used to generate the SPICE .cir
+	 * file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampInd(FileWriter writer) throws IOException {
 		int i = 1;
@@ -716,8 +810,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<ActiveBipole> voltages;
 
 	/**
-	 * Executes at the end of a voltage source context; extracts the waveform and connected nodes from the context.
-	 * @param ctx Context of the voltage source (a sub syntax tree with voltage source as root).
+	 * Executes at the end of a voltage source context; extracts the waveform
+	 * and connected nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the voltage source (a sub syntax tree with voltage
+	 *            source as root).
 	 */
 	@Override
 	public void exitVoltage(grammar.GrammarParser.VoltageContext ctx) {
@@ -752,9 +850,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of voltage sources to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of voltage sources to file. Used to generate the SPICE
+	 * .cir file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampVol(FileWriter writer) throws IOException {
 		int i = 1;
@@ -772,8 +875,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<ActiveBipole> currents;
 
 	/**
-	 * Executes at the end of a current source context; extracts the waveform and connected nodes from the context.
-	 * @param ctx Context of the current source (a sub syntax tree with current source as root).
+	 * Executes at the end of a current source context; extracts the waveform
+	 * and connected nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the current source (a sub syntax tree with current
+	 *            source as root).
 	 */
 	@Override
 	public void exitCurrent(grammar.GrammarParser.CurrentContext ctx) {
@@ -800,9 +907,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of current sources to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of current sources to file. Used to generate the SPICE
+	 * .cir file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampCur(FileWriter writer) throws IOException {
 		int i = 1;
@@ -820,8 +932,11 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<Diode> diodes;
 
 	/**
-	 * Executes at the end of a diode context; extracts model and connected nodes from the context.
-	 * @param ctx Context of the diode (a sub syntax tree with diode as root).
+	 * Executes at the end of a diode context; extracts model and connected
+	 * nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the diode (a sub syntax tree with diode as root).
 	 */
 	@Override
 	public void exitDiode(grammar.GrammarParser.DiodeContext ctx) {
@@ -849,8 +964,12 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints the list of diodes to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampDio(FileWriter writer) throws IOException {
 		int i = 1;
@@ -868,8 +987,11 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<Transistor> bjts;
 
 	/**
-	 * Executes at the end of a BJT context; extracts model and connected nodes from the context.
-	 * @param ctx Context of the BJT (a sub syntax tree with BJT as root).
+	 * Executes at the end of a BJT context; extracts model and connected nodes
+	 * from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the BJT (a sub syntax tree with BJT as root).
 	 */
 	@Override
 	public void exitBjt(grammar.GrammarParser.BjtContext ctx) {
@@ -894,8 +1016,12 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints the list of BJTs to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampBjt(FileWriter writer) throws IOException {
 		int i = 1;
@@ -913,8 +1039,11 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<Transistor> mosfets;
 
 	/**
-	 * Executes at the end of a MOSFET context; extracts model and connected nodes from the context.
-	 * @param ctx Context of the MOSFET (a sub syntax tree with MOSFET as root).
+	 * Executes at the end of a MOSFET context; extracts model and connected
+	 * nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the MOSFET (a sub syntax tree with MOSFET as root).
 	 */
 	@Override
 	public void exitMosfet(grammar.GrammarParser.MosfetContext ctx) {
@@ -939,8 +1068,12 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints the list of MOSFETs to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampMos(FileWriter writer) throws IOException {
 		int i = 1;
@@ -958,8 +1091,11 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<Transistor> jfets;
 
 	/**
-	 * Executes at the end of a JFET context; extracts model and connected nodes from the context.
-	 * @param ctx Context of the JFET (a sub syntax tree with JFET as root).
+	 * Executes at the end of a JFET context; extracts model and connected nodes
+	 * from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the JFET (a sub syntax tree with JFET as root).
 	 */
 	@Override
 	public void exitJfet(grammar.GrammarParser.JfetContext ctx) {
@@ -984,8 +1120,12 @@ public class Compiler extends GrammarBaseListener {
 
 	/**
 	 * Prints the list of JFETs to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampJfet(FileWriter writer) throws IOException {
 		int i = 1;
@@ -1003,8 +1143,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<GenericModel> models;
 
 	/**
-	 * Executes at the end of a generic model context; extracts model and connected nodes from the context.
-	 * @param ctx Context of the generic model (a sub syntax tree with generic model as root).
+	 * Executes at the end of a generic model context; extracts model and
+	 * connected nodes from the context.
+	 * 
+	 * @param ctx
+	 *            Context of the generic model (a sub syntax tree with generic
+	 *            model as root).
 	 */
 	@Override
 	public void exitModel(grammar.GrammarParser.ModelContext ctx) {
@@ -1033,9 +1177,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of generic models to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of generic models to file. Used to generate the SPICE
+	 * .cir file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampMod(FileWriter writer) throws IOException {
 		int i = 1;
@@ -1053,8 +1202,12 @@ public class Compiler extends GrammarBaseListener {
 	private Vector<String> directives;
 
 	/**
-	 * Executes at the end of a directive context; extracts the directive from the context.
-	 * @param ctx Context of the directive (a sub syntax tree with directive as root).
+	 * Executes at the end of a directive context; extracts the directive from
+	 * the context.
+	 * 
+	 * @param ctx
+	 *            Context of the directive (a sub syntax tree with directive as
+	 *            root).
 	 */
 	@Override
 	public void enterNewdir(grammar.GrammarParser.NewdirContext ctx) {
@@ -1070,9 +1223,14 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints the list of directives to file. Used to generate the SPICE .cir file.
-	 *  @param writer A {@link FileWriter} instance used to write on file.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints the list of directives to file. Used to generate the SPICE .cir
+	 * file.
+	 * 
+	 * @param writer
+	 *            A {@link FileWriter} instance used to write on file.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	private void stampDir(FileWriter writer) throws IOException {
 		for (String s : directives) {
@@ -1120,14 +1278,17 @@ public class Compiler extends GrammarBaseListener {
 	}
 
 	/**
-	 * Prints all the circuit information to file. Used to generate the SPICE .cir file.
-	 * @param path The path of the file in which to write.
-	 * @throws IOException Throws an {@link IOException} if errors are encountered writing on file.
+	 * Prints all the circuit information to file. Used to generate the SPICE
+	 * .cir file.
+	 * 
+	 * @param path
+	 *            The path of the file in which to write.
+	 * @throws IOException
+	 *             Throws an {@link IOException} if errors are encountered
+	 *             writing on file.
 	 */
 	public void writeOnFile(File path) throws IOException {
 		FileWriter writer = new FileWriter(path);
-		
-		
 
 		stampTitle(writer);
 		stampLib(writer);

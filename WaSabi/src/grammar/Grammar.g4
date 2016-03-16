@@ -2,7 +2,7 @@ grammar Grammar;
 options{language = Java;}
 
 //lexer
-COMMENT:		'-' '-' ~('\n'| '-' )* ('-''-'|'\n')	{skip();};
+COMMENT:		'-' '-' ~('\n'|'-' )* ('-' '-' |'\n') {skip();};
 WS:				('\t'|'\r'|'\n'|' ') {skip();};
 
 fragment A:'A'|'a';
@@ -94,7 +94,8 @@ fragment FILENAME: (~('/'|'\\'|':'|'*'|'?'|'<'|'>'|'|'|'\r'|'\t'|'\n')+);
 /*08*/newconst:		ID EQUAL newconst2;
 /*09*/newconst2:	newvalue|newwave|newmod;
 
-/*10*/newvalue:		VALUE UNIT? | PI;
+/*10*/newvalue:		VALUE units | PI;
+/*11*/units:		UNIT?;
 
 /*11*/newwave:		newwaveDC|newwaveAC;
 /*12*/newwaveDC:	DC OPENBRACKET valueID CLOSEBRACKET;
@@ -105,7 +106,7 @@ fragment FILENAME: (~('/'|'\\'|':'|'*'|'?'|'<'|'>'|'|'|'\r'|'\t'|'\n')+);
 /*15*/components:	COMPONENT listcomp;
 /*16*/listcomp: 	(newcomp listcomp)?;
 /*17*/newcomp:		resistance	|
-					capaticance	|
+					capacitance	|
 					inductance	|
 					voltage		|
 					current		|
@@ -116,7 +117,7 @@ fragment FILENAME: (~('/'|'\\'|':'|'*'|'?'|'<'|'>'|'|'|'\r'|'\t'|'\n')+);
 					model		;
 			
 /*18*/resistance:	RES   valueID   AT OPENBRACKET node SEPARATOR node 			      CLOSEBRACKET;
-/*19*/capaticance: 	CAP   valueID   AT OPENBRACKET node SEPARATOR node 				  CLOSEBRACKET;
+/*19*/capacitance: 	CAP   valueID   AT OPENBRACKET node SEPARATOR node 				  CLOSEBRACKET;
 /*20*/inductance:	IND   valueID   AT OPENBRACKET node SEPARATOR node 				  CLOSEBRACKET;
 /*21*/voltage:	 	VOL   waveID    AT OPENBRACKET node SEPARATOR node 				  CLOSEBRACKET;
 /*22*/current:	 	CUR   waveID    AT OPENBRACKET node SEPARATOR node 				  CLOSEBRACKET;

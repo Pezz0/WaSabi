@@ -69,16 +69,6 @@ public interface GrammarListener extends ParseTreeListener {
 	 */
 	void exitListconst(@NotNull GrammarParser.ListconstContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarParser#capaticance}.
-	 * @param ctx the parse tree
-	 */
-	void enterCapaticance(@NotNull GrammarParser.CapaticanceContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarParser#capaticance}.
-	 * @param ctx the parse tree
-	 */
-	void exitCapaticance(@NotNull GrammarParser.CapaticanceContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarParser#listnodes}.
 	 * @param ctx the parse tree
 	 */
@@ -98,6 +88,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWaveID(@NotNull GrammarParser.WaveIDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#units}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnits(@NotNull GrammarParser.UnitsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#units}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnits(@NotNull GrammarParser.UnitsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#dirsim}.
 	 * @param ctx the parse tree
@@ -268,6 +268,16 @@ public interface GrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNewmod(@NotNull GrammarParser.NewmodContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarParser#capacitance}.
+	 * @param ctx the parse tree
+	 */
+	void enterCapacitance(@NotNull GrammarParser.CapacitanceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarParser#capacitance}.
+	 * @param ctx the parse tree
+	 */
+	void exitCapacitance(@NotNull GrammarParser.CapacitanceContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarParser#newcomp}.
 	 * @param ctx the parse tree
