@@ -639,18 +639,20 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitResistance(grammar.GrammarParser.ResistanceContext ctx) {
-		if (newNodes.get(0) == newNodes.get(1))
-			exceptions.add(new SameNodeException(ctx.RES().getSymbol()));
-
-		if (lastValueID1.equals("0"))
-			exceptions.add(new ZeroValueException(ctx.RES().getSymbol()));
-
-		resistances.add(new PassiveBipole(lastValueID1, newNodes.get(0), newNodes.get(1)));
-
-		comp = true;
-
-		resetLastValue();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			if (newNodes.get(0) == newNodes.get(1))
+				exceptions.add(new SameNodeException(ctx.RES().getSymbol()));
+	
+			if (lastValueID1.equals("0"))
+				exceptions.add(new ZeroValueException(ctx.RES().getSymbol()));
+	
+			resistances.add(new PassiveBipole(lastValueID1, newNodes.get(0), newNodes.get(1)));
+	
+			comp = true;
+	
+			resetLastValue();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -699,18 +701,20 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitCapacitance(grammar.GrammarParser.CapacitanceContext ctx) {
-		if (newNodes.get(0) == newNodes.get(1))
-			exceptions.add(new SameNodeException(ctx.CAP().getSymbol()));
-
-		if (lastValueID1.equals("0"))
-			exceptions.add(new ZeroValueException(ctx.CAP().getSymbol()));
-
-		capacitors.add(new PassiveBipole(lastValueID1, newNodes.get(0), newNodes.get(1)));
-
-		comp = true;
-
-		resetLastValue();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			if (newNodes.get(0) == newNodes.get(1))
+				exceptions.add(new SameNodeException(ctx.CAP().getSymbol()));
+	
+			if (lastValueID1.equals("0"))
+				exceptions.add(new ZeroValueException(ctx.CAP().getSymbol()));
+	
+			capacitors.add(new PassiveBipole(lastValueID1, newNodes.get(0), newNodes.get(1)));
+	
+			comp = true;
+	
+			resetLastValue();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -759,18 +763,20 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitInductance(grammar.GrammarParser.InductanceContext ctx) {
-		if (newNodes.get(0) == newNodes.get(1))
-			exceptions.add(new SameNodeException(ctx.IND().getSymbol()));
-
-		if (lastValueID1.equals("0"))
-			exceptions.add(new ZeroValueException(ctx.IND().getSymbol()));
-
-		inductances.add(new PassiveBipole(lastValueID1, newNodes.get(0), newNodes.get(1)));
-
-		comp = true;
-
-		resetLastValue();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			if (newNodes.get(0) == newNodes.get(1))
+				exceptions.add(new SameNodeException(ctx.IND().getSymbol()));
+	
+			if (lastValueID1.equals("0"))
+				exceptions.add(new ZeroValueException(ctx.IND().getSymbol()));
+	
+			inductances.add(new PassiveBipole(lastValueID1, newNodes.get(0), newNodes.get(1)));
+	
+			comp = true;
+	
+			resetLastValue();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -819,23 +825,24 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitVoltage(grammar.GrammarParser.VoltageContext ctx) {
-
-		int n1 = newNodes.get(0);
-		int n2 = newNodes.get(1);
-
-		if (n1 == n2)
-			exceptions.add(new SameNodeException(ctx.VOL().getSymbol()));
-
-		for (ActiveBipole v : voltages)
-			if (v.isParallel(n1, n2))
-				exceptions.add(new ParallelVoltageException(ctx.VOL().getSymbol()));
-
-		voltages.addElement(new ActiveBipole(lastWaveform, n1, n2));
-
-		comp = true;
-
-		resetLastWaveform();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			int n1 = newNodes.get(0);
+			int n2 = newNodes.get(1);
+	
+			if (n1 == n2)
+				exceptions.add(new SameNodeException(ctx.VOL().getSymbol()));
+	
+			for (ActiveBipole v : voltages)
+				if (v.isParallel(n1, n2))
+					exceptions.add(new ParallelVoltageException(ctx.VOL().getSymbol()));
+	
+			voltages.addElement(new ActiveBipole(lastWaveform, n1, n2));
+	
+			comp = true;
+	
+			resetLastWaveform();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -884,15 +891,17 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitCurrent(grammar.GrammarParser.CurrentContext ctx) {
-		if (newNodes.get(0) == newNodes.get(1))
-			exceptions.add(new SameNodeException(ctx.CUR().getSymbol()));
-
-		currents.addElement(new ActiveBipole(lastWaveform, newNodes.get(0), newNodes.get(1)));
-
-		comp = true;
-
-		resetLastWaveform();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			if (newNodes.get(0) == newNodes.get(1))
+				exceptions.add(new SameNodeException(ctx.CUR().getSymbol()));
+	
+			currents.addElement(new ActiveBipole(lastWaveform, newNodes.get(0), newNodes.get(1)));
+	
+			comp = true;
+	
+			resetLastWaveform();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -940,15 +949,17 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitDiode(grammar.GrammarParser.DiodeContext ctx) {
-		if (newNodes.get(0) == newNodes.get(1))
-			exceptions.add(new SameNodeException(ctx.DIO().getSymbol()));
-
-		diodes.addElement(new Diode(lastModelType, newNodes.get(0), newNodes.get(1)));
-
-		comp = true;
-
-		resetLastModelType();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			if (newNodes.get(0) == newNodes.get(1))
+				exceptions.add(new SameNodeException(ctx.DIO().getSymbol()));
+	
+			diodes.addElement(new Diode(lastModelType, newNodes.get(0), newNodes.get(1)));
+	
+			comp = true;
+	
+			resetLastModelType();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -995,12 +1006,14 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitBjt(grammar.GrammarParser.BjtContext ctx) {
-		bjts.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
-
-		comp = true;
-
-		resetLastModelType();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			bjts.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
+	
+			comp = true;
+	
+			resetLastModelType();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -1047,12 +1060,14 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitMosfet(grammar.GrammarParser.MosfetContext ctx) {
-		mosfets.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
-
-		comp = true;
-
-		resetLastModelType();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			mosfets.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
+	
+			comp = true;
+	
+			resetLastModelType();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -1099,12 +1114,14 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitJfet(grammar.GrammarParser.JfetContext ctx) {
-		jfets.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
-
-		comp = true;
-
-		resetLastModelType();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			jfets.add(new Transistor(lastModelType, newNodes.get(0), newNodes.get(1), newNodes.get(2)));
+	
+			comp = true;
+	
+			resetLastModelType();
+			resetNewNodes();
+		}
 	}
 
 	/**
@@ -1152,16 +1169,17 @@ public class Compiler extends GrammarBaseListener {
 	 */
 	@Override
 	public void exitModel(grammar.GrammarParser.ModelContext ctx) {
-		GenericModel m = new GenericModel(lastModelType);
-		for (Integer n : newNodes)
-			m.addNode(n);
-
-		models.add(m);
-
-		comp = true;
-
-		resetLastModelType();
-		resetNewNodes();
+		if(lastValueID1!=null){									//if this is null it's WrongTypeException, ignoring the component
+			GenericModel m = new GenericModel(lastModelType);
+			for (Integer n : newNodes)
+				m.addNode(n);
+	
+			models.add(m);
+			comp = true;
+	
+			resetLastModelType();
+			resetNewNodes();
+		}
 	}
 
 	/**
