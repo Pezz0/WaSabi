@@ -12,7 +12,7 @@ public class FloatingNodeException extends SemanticException {
 	 * @param node The name of the floating node.
 	 */
 	public FloatingNodeException(String node) {
-		super(null, "The node '" + node + "' is used only one time, it should be used at least two times.");
+		super(null, "The node '" + node + "' is only used once, it should be used at least twice.");
 
 	}
 
