@@ -25,7 +25,7 @@ fragment S:'S'|'s';
 fragment T:'T'|'t';
 fragment U:'U'|'u';
 fragment V:'V'|'v';
-fragment NUMBER: (('1'..'9') ('0'..'9')* ('.'('0'..'9')*) ? );
+fragment NUMBER: (('0' '.')|(('1'..'9') ('0'..'9')* '.'?) )('0'..'9')*;
 
 /*03*/OPENBRACKET:	'(' | '[' | '{';
 /*04*/CLOSEBRACKET: ')' | ']' | '}';
