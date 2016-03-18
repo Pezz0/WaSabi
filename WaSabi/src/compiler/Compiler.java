@@ -1291,7 +1291,7 @@ public class Compiler extends GrammarBaseListener {
 		System.out.println("\nComponents:");
 		stampComp();
 
-		System.out.println("\nSPICE directive:");
+		System.out.println("\nSPICE directives:");
 		stampDir();
 	}
 
